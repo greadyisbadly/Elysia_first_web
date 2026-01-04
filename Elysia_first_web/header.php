@@ -854,6 +854,8 @@
 	<link rel='stylesheet' id='swiper-css' href='<?php echo get_template_directory_uri(); ?>/static/css/swiper.min.css' media='all' />
 	<link rel='stylesheet' id='e-swiper-css' href='<?php echo get_template_directory_uri(); ?>/static/css/e-swiper.min.css' media='all' />
 	<link rel='stylesheet' id='elementor-post-598-css' href='<?php echo get_template_directory_uri(); ?>/static/css/post-598.css' media='all' />
+	<link rel='stylesheet' id='elementor-post-188-css' href='<?php echo get_template_directory_uri(); ?>/static/css/post-188.css' media='all' />
+	<link rel='stylesheet' id='elementor-animations-css' href='<?php echo get_template_directory_uri(); ?>/static/css/zoomIn.min.css' media='all' />
 	<link rel='stylesheet' id='font-awesome-5-all-css' href='<?php echo get_template_directory_uri(); ?>/static/css/all.min.css' media='all' />
 	<link rel='stylesheet' id='font-awesome-4-shim-css' href='<?php echo get_template_directory_uri(); ?>/static/css/v4-shims.min.css' media='all' />
 	<link rel='stylesheet' id='elementor-gf-local-roboto-css' href='<?php echo get_template_directory_uri(); ?>/static/css/roboto.css' media='all' />
