@@ -99,15 +99,7 @@ get_header();
             <div class="entry-content is-layout-constrained">
                 <div data-elementor-type="wp-page" data-elementor-id="214" class="elementor elementor-214" data-elementor-post-type="page">
                     <div class="elementor elementor-188">
-                        <?php
-                        get_template_part(
-                            'template-parts/components/page-hero-title',
-                            null,
-                            array(
-                                'title' => 'Our Factory',
-                            )
-                        );
-                        ?>
+                        <?php get_template_part('template-parts/components/page-hero-title'); ?>
                     </div>
                     <?php
                     get_template_part('template-parts/one_page/factory-intro');

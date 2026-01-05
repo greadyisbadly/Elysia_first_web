@@ -896,6 +896,136 @@ if (function_exists('acf_add_local_field_group')) {
 
     acf_add_local_field_group(
         array(
+            'key' => 'group_elysia_factory_page_settings',
+            'title' => 'Factory 页面设置',
+            'fields' => array(
+                array(
+                    'key' => 'field_factory_hero_title',
+                    'label' => 'Hero 标题覆盖',
+                    'name' => 'factory_hero_title',
+                    'type' => 'text',
+                ),
+                array(
+                    'key' => 'field_factory_hero_subtitle',
+                    'label' => 'Hero 副标题覆盖',
+                    'name' => 'factory_hero_subtitle',
+                    'type' => 'text',
+                ),
+                array(
+                    'key' => 'field_factory_hero_breadcrumb_extra',
+                    'label' => '面包屑附加文案',
+                    'name' => 'factory_hero_breadcrumb_extra',
+                    'type' => 'text',
+                ),
+                array(
+                    'key' => 'field_factory_intro_text',
+                    'label' => '工厂简介文案',
+                    'name' => 'factory_intro_text',
+                    'type' => 'wysiwyg',
+                    'tabs' => 'all',
+                    'toolbar' => 'full',
+                    'media_upload' => 1,
+                ),
+                array(
+                    'key' => 'field_factory_intro_image',
+                    'label' => '工厂简介图片',
+                    'name' => 'factory_intro_image',
+                    'type' => 'image',
+                    'return_format' => 'array',
+                    'preview_size' => 'large',
+                    'library' => 'all',
+                ),
+                array(
+                    'key' => 'field_factory_intro_contact_button_text',
+                    'label' => '工厂简介按钮文案',
+                    'name' => 'factory_intro_contact_button_text',
+                    'type' => 'text',
+                ),
+                array(
+                    'key' => 'field_factory_intro_contact_popup_id',
+                    'label' => '工厂简介按钮弹窗 ID',
+                    'name' => 'factory_intro_contact_popup_id',
+                    'type' => 'text',
+                ),
+                array(
+                    'key' => 'field_factory_gallery',
+                    'label' => '工厂图库',
+                    'name' => 'factory_gallery',
+                    'type' => 'gallery',
+                    'return_format' => 'array',
+                ),
+                array(
+                    'key' => 'field_factory_details_intro',
+                    'label' => '工厂详情主文案',
+                    'name' => 'factory_details_intro',
+                    'type' => 'wysiwyg',
+                    'tabs' => 'all',
+                    'toolbar' => 'full',
+                    'media_upload' => 1,
+                ),
+                array(
+                    'key' => 'field_factory_details_boxes',
+                    'label' => '工厂详情三列图文',
+                    'name' => 'factory_details_boxes',
+                    'type' => 'repeater',
+                    'layout' => 'row',
+                    'button_label' => '添加详情卡片',
+                    'sub_fields' => array(
+                        array(
+                            'key' => 'field_factory_details_box_title',
+                            'label' => '标题',
+                            'name' => 'title',
+                            'type' => 'text',
+                        ),
+                        array(
+                            'key' => 'field_factory_details_box_description',
+                            'label' => '说明',
+                            'name' => 'description',
+                            'type' => 'wysiwyg',
+                            'tabs' => 'all',
+                            'toolbar' => 'full',
+                            'media_upload' => 1,
+                        ),
+                        array(
+                            'key' => 'field_factory_details_box_image',
+                            'label' => '图片',
+                            'name' => 'image',
+                            'type' => 'image',
+                            'return_format' => 'array',
+                            'preview_size' => 'large',
+                            'library' => 'all',
+                        ),
+                    ),
+                ),
+                array(
+                    'key' => 'field_factory_related_pages',
+                    'label' => '相关页面',
+                    'name' => 'factory_related_pages',
+                    'type' => 'relationship',
+                    'post_type' => array('page'),
+                    'filters' => array('search', 'post_type'),
+                    'return_format' => 'object',
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'post_type',
+                        'operator' => '==',
+                        'value' => 'page',
+                    ),
+                    array(
+                        'param' => 'page_template',
+                        'operator' => '==',
+                        'value' => 'page-factory.php',
+                    ),
+                ),
+            ),
+        )
+    );
+
+    acf_add_local_field_group(
+        array(
             'key' => 'group_elysia_about_company_intro',
             'title' => 'About - 公司介绍',
             'fields' => array(

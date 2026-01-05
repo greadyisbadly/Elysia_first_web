@@ -3,23 +3,37 @@ $page_hero_title = '';
 $page_hero_subtitle = '';
 $page_hero_bg_url = '';
 
+$is_factory_template = function_exists('is_page_template') && is_page_template('page-factory.php');
+
 if (function_exists('get_field')) {
-    $hero_title = get_field('hero_title');
-    $hero_title_global = get_field('hero_title', 'option');
+    if ($is_factory_template) {
+        $factory_hero_title = get_field('factory_hero_title');
+        if ($factory_hero_title) {
+            $page_hero_title = $factory_hero_title;
+        }
 
-    if ($hero_title) {
-        $page_hero_title = $hero_title;
-    } elseif ($hero_title_global) {
-        $page_hero_title = $hero_title_global;
-    }
+        $factory_hero_subtitle = get_field('factory_hero_subtitle');
+        if ($factory_hero_subtitle) {
+            $page_hero_subtitle = $factory_hero_subtitle;
+        }
+    } else {
+        $hero_title = get_field('hero_title');
+        $hero_title_global = get_field('hero_title', 'option');
 
-    $hero_subtitle = get_field('hero_subtitle');
-    $hero_subtitle_global = get_field('hero_subtitle', 'option');
+        if ($hero_title) {
+            $page_hero_title = $hero_title;
+        } elseif ($hero_title_global) {
+            $page_hero_title = $hero_title_global;
+        }
 
-    if ($hero_subtitle) {
-        $page_hero_subtitle = $hero_subtitle;
-    } elseif ($hero_subtitle_global) {
-        $page_hero_subtitle = $hero_subtitle_global;
+        $hero_subtitle = get_field('hero_subtitle');
+        $hero_subtitle_global = get_field('hero_subtitle', 'option');
+
+        if ($hero_subtitle) {
+            $page_hero_subtitle = $hero_subtitle;
+        } elseif ($hero_subtitle_global) {
+            $page_hero_subtitle = $hero_subtitle_global;
+        }
     }
 
     $hero_bg = get_field('hero_background_image');
@@ -32,6 +46,10 @@ if (function_exists('get_field')) {
     if (is_array($hero_bg) && !empty($hero_bg['url'])) {
         $page_hero_bg_url = $hero_bg['url'];
     }
+}
+
+if ($page_hero_title === '' && $is_factory_template && function_exists('get_the_title')) {
+    $page_hero_title = get_the_title();
 }
 
 $section_style = '';
