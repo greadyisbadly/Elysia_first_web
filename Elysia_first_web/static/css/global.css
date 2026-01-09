@@ -1,4 +1,4 @@
-﻿[data-header*="type-1"] .ct-header [data-id="logo"] .site-logo-container {
+[data-header*="type-1"] .ct-header [data-id="logo"] .site-logo-container {
     --logo-max-height: 56px;
 }
 

@@ -269,6 +269,22 @@ function elysia_first_web_setup()
     );
 }
 
+add_filter('nav_menu_link_attributes', 'elysia_first_web_add_ct_menu_link_class', 10, 3);
+
+function elysia_first_web_add_ct_menu_link_class($atts, $item, $args)
+{
+    if (isset($args->theme_location) && $args->theme_location === 'primary') {
+        $existing_class = isset($atts['class']) ? $atts['class'] : '';
+        $classes = preg_split('/\s+/', $existing_class, -1, PREG_SPLIT_NO_EMPTY);
+        if (!in_array('ct-menu-link', $classes, true)) {
+            $classes[] = 'ct-menu-link';
+        }
+        $atts['class'] = implode(' ', $classes);
+    }
+
+    return $atts;
+}
+
 add_action('after_setup_theme', 'elysia_first_web_setup');
 
 function elysia_first_web_register_product_post_type()

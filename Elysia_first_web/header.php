@@ -862,7 +862,7 @@
 	<link rel='stylesheet' id='elementor-icons-shared-0-css' href='<?php echo get_template_directory_uri(); ?>/static/css/fontawesome.min.css' media='all' />
 	<link rel='stylesheet' id='elementor-icons-fa-solid-css' href='<?php echo get_template_directory_uri(); ?>/static/css/solid.min.css' media='all' />
 	<link rel='stylesheet' id='elementor-icons-fa-brands-css' href='<?php echo get_template_directory_uri(); ?>/static/css/brands.min.css' media='all' />
-	<?php if (!function_exists('is_product') || !is_product()) : ?>
+	<?php if (!is_singular('site_product') && !is_tax('product_category')) : ?>
 		<link rel='stylesheet' id='elysia-first-web-style-css' href='<?php echo esc_url(get_stylesheet_uri()); ?>' media='all' />
 	<?php endif; ?>
 	<style id="elementor-archive-1206-inline-css">
@@ -947,11 +947,11 @@
 </head>
 
 
-<body <?php body_class(); ?> data-link="type-2" data-prefix="<?php echo (function_exists('is_product') && is_product()) ? 'product' : 'single_page'; ?>" data-header="type-1:sticky" data-footer="type-1" itemscope="itemscope" itemtype="https://schema.org/WebPage">
+<body <?php body_class(); ?> data-link="type-2" data-prefix="<?php echo (is_singular('site_product') || is_tax('product_category')) ? 'product' : 'single_page'; ?>" data-header="type-1:sticky" data-footer="type-1" itemscope="itemscope" itemtype="https://schema.org/WebPage">
 
 	<?php
 	wp_body_open();
-	if (function_exists('is_product') && is_product()) :
+	if (is_singular('site_product') || is_tax('product_category')) :
 		$okki_site_id = get_option('elysia_okki_site_id', '39166-9223');
 		$okki_gid     = get_option('elysia_okki_gid', 'UA-238156102-34');
 	?>
