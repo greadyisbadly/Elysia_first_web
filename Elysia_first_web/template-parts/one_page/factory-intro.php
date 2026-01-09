@@ -2,8 +2,8 @@
 $factory_intro_text = '';
 $factory_intro_image = null;
 $factory_intro_contact_button_text = '';
-$factory_intro_contact_href = '';
 $factory_intro_has_acf = false;
+$factory_intro_contact_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjMwNiIsInRvZ2dsZSI6ZmFsc2V9';
 
 if (function_exists('get_field')) {
     $intro_text_value = get_field('factory_intro_text');
@@ -22,24 +22,6 @@ if (function_exists('get_field')) {
     if ($button_text_value) {
         $factory_intro_contact_button_text = $button_text_value;
         $factory_intro_has_acf = true;
-    }
-
-    $contact_popup_id = get_field('factory_intro_contact_popup_id');
-    if ($contact_popup_id) {
-        $popup_id_value = (string) $contact_popup_id;
-        $settings_array = array(
-            'id' => $popup_id_value,
-            'toggle' => false,
-        );
-        if (function_exists('wp_json_encode')) {
-            $settings_json = wp_json_encode($settings_array);
-        } else {
-            $settings_json = json_encode($settings_array);
-        }
-        if ($settings_json) {
-            $factory_intro_contact_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3D' . rawurlencode(base64_encode($settings_json));
-            $factory_intro_has_acf = true;
-        }
     }
 }
 

@@ -112,6 +112,9 @@ get_header();
         </article>
     </div>
 </main>
+<?php
+get_template_part('template-parts/one_page/shared-contact-popup');
+?>
 <script>
     const lazyloadRunObserver = () => {
         const lazyloadBackgrounds = document.querySelectorAll(`.e-con.e-parent:not(.e-lazyloaded)`);

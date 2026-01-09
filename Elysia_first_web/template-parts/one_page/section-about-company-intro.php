@@ -3,9 +3,6 @@ $elysia_about_intro_badge = '';
 $elysia_about_intro_title = '';
 $elysia_about_intro_paragraphs = array();
 $elysia_about_intro_image = null;
-$elysia_about_intro_link_type = '';
-$elysia_about_intro_popup_id = null;
-$elysia_about_intro_cta_url = '';
 $elysia_about_intro_cta_label = '';
 $elysia_about_intro_has_acf = false;
 
@@ -34,24 +31,6 @@ if (function_exists('get_field')) {
         $elysia_about_intro_has_acf = true;
     }
 
-    $field_value = get_field('about_intro_link_type');
-    if ($field_value) {
-        $elysia_about_intro_link_type = $field_value;
-        $elysia_about_intro_has_acf = true;
-    }
-
-    $field_value = get_field('about_intro_popup_id');
-    if ($field_value !== null && $field_value !== '') {
-        $elysia_about_intro_popup_id = (int) $field_value;
-        $elysia_about_intro_has_acf = true;
-    }
-
-    $field_value = get_field('about_intro_cta_url');
-    if ($field_value) {
-        $elysia_about_intro_cta_url = $field_value;
-        $elysia_about_intro_has_acf = true;
-    }
-
     $field_value = get_field('about_intro_cta_label');
     if ($field_value) {
         $elysia_about_intro_cta_label = $field_value;
@@ -62,26 +41,7 @@ if (function_exists('get_field')) {
 if (!$elysia_about_intro_has_acf) {
     return;
 }
-
-$elysia_about_intro_cta_href = '#';
-
-if ($elysia_about_intro_link_type === 'popup' && $elysia_about_intro_popup_id) {
-    $popup_id_value = (string) $elysia_about_intro_popup_id;
-    $settings_array = array(
-        'id' => $popup_id_value,
-        'toggle' => false,
-    );
-    if (function_exists('wp_json_encode')) {
-        $settings_json = wp_json_encode($settings_array);
-    } else {
-        $settings_json = json_encode($settings_array);
-    }
-    if ($settings_json) {
-        $elysia_about_intro_cta_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3D' . rawurlencode(base64_encode($settings_json));
-    }
-} elseif ($elysia_about_intro_link_type === 'page' && $elysia_about_intro_cta_url) {
-    $elysia_about_intro_cta_href = $elysia_about_intro_cta_url;
-}
+$elysia_about_intro_cta_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjMwNiIsInRvZ2dsZSI6ZmFsc2V9';
 ?>
 <section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-3fd15dce elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="3fd15dce" data-element_type="section">
     <div class="elementor-container elementor-column-gap-custom">

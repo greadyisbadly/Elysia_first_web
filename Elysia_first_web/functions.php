@@ -789,20 +789,6 @@ if (function_exists('acf_add_local_field_group')) {
                     'type' => 'text',
                 ),
                 array(
-                    'key' => 'field_elysia_product_archive_cta_page',
-                    'label' => '主按钮链接页面',
-                    'name' => 'elysia_product_archive_cta_page',
-                    'type' => 'post_object',
-                    'post_type' => array('page'),
-                    'return_format' => 'id',
-                ),
-                array(
-                    'key' => 'field_elysia_product_archive_cta_action_url',
-                    'label' => '主按钮自定义链接',
-                    'name' => 'elysia_product_archive_cta_action_url',
-                    'type' => 'url',
-                ),
-                array(
                     'key' => 'field_elysia_product_archive_catalog_file',
                     'label' => '目录 PDF 文件',
                     'name' => 'elysia_product_archive_catalog_file',
@@ -836,6 +822,23 @@ if (function_exists('acf_add_local_field_group')) {
                         'value' => 'acf-options',
                     ),
                 ),
+            ),
+        )
+    );
+
+    acf_add_local_field_group(
+        array(
+            'key' => 'group_elysia_product_archive_cta_page_override',
+            'title' => 'Product Archive CTA（页面覆盖）',
+            'fields' => array(
+                array(
+                    'key' => 'field_elysia_product_archive_cta_label_page',
+                    'label' => '主按钮文字',
+                    'name' => 'elysia_product_archive_cta_label',
+                    'type' => 'text',
+                ),
+            ),
+            'location' => array(
                 array(
                     array(
                         'param' => 'page_template',
@@ -872,13 +875,6 @@ if (function_exists('acf_add_local_field_group')) {
                         'param' => 'options_page',
                         'operator' => '==',
                         'value' => 'acf-options',
-                    ),
-                ),
-                array(
-                    array(
-                        'param' => 'page_template',
-                        'operator' => '==',
-                        'value' => 'woocommerce/archive-product.php',
                     ),
                 ),
             ),
@@ -1013,13 +1009,6 @@ if (function_exists('acf_add_local_field_group')) {
                         'param' => 'options_page',
                         'operator' => '==',
                         'value' => 'acf-options',
-                    ),
-                ),
-                array(
-                    array(
-                        'param' => 'page_template',
-                        'operator' => '==',
-                        'value' => 'woocommerce/archive-product.php',
                     ),
                 ),
             ),
@@ -1269,12 +1258,6 @@ if (function_exists('acf_add_local_field_group')) {
                     'type' => 'text',
                 ),
                 array(
-                    'key' => 'field_factory_intro_contact_popup_id',
-                    'label' => '工厂简介按钮弹窗 ID',
-                    'name' => 'factory_intro_contact_popup_id',
-                    'type' => 'text',
-                ),
-                array(
                     'key' => 'field_factory_gallery',
                     'label' => '工厂图库',
                     'name' => 'factory_gallery',
@@ -1390,12 +1373,6 @@ if (function_exists('acf_add_local_field_group')) {
                     'key' => 'field_quality_intro_contact_button_text',
                     'label' => 'Intro 按钮文案',
                     'name' => 'quality_intro_contact_button_text',
-                    'type' => 'text',
-                ),
-                array(
-                    'key' => 'field_quality_intro_contact_popup_id',
-                    'label' => 'Intro 按钮弹窗 ID',
-                    'name' => 'quality_intro_contact_popup_id',
                     'type' => 'text',
                 ),
                 array(
@@ -1591,43 +1568,6 @@ if (function_exists('acf_add_local_field_group')) {
                     'label' => '按钮文案',
                     'name' => 'why_intro_cta_text',
                     'type' => 'text',
-                ),
-                array(
-                    'key' => 'field_why_intro_cta_type',
-                    'label' => '按钮类型',
-                    'name' => 'why_intro_cta_type',
-                    'type' => 'select',
-                    'choices' => array(
-                        'popup' => 'Popup',
-                        'contact_page' => 'Contact Page',
-                        'custom_url' => 'Custom URL',
-                    ),
-                    'allow_null' => 1,
-                    'multiple' => 0,
-                    'ui' => 1,
-                    'return_format' => 'value',
-                ),
-                array(
-                    'key' => 'field_why_intro_cta_popup_id',
-                    'label' => 'Popup ID',
-                    'name' => 'why_intro_cta_popup_id',
-                    'type' => 'number',
-                ),
-                array(
-                    'key' => 'field_why_intro_cta_page',
-                    'label' => '联系页面',
-                    'name' => 'why_intro_cta_page',
-                    'type' => 'post_object',
-                    'post_type' => array('page'),
-                    'return_format' => 'id',
-                    'allow_null' => 1,
-                    'multiple' => 0,
-                ),
-                array(
-                    'key' => 'field_why_intro_cta_custom_url',
-                    'label' => '自定义链接',
-                    'name' => 'why_intro_cta_custom_url',
-                    'type' => 'url',
                 ),
                 array(
                     'key' => 'field_why_intro_image_main',
@@ -1826,34 +1766,6 @@ if (function_exists('acf_add_local_field_group')) {
                     'return_format' => 'array',
                     'preview_size' => 'large',
                     'library' => 'all',
-                ),
-                array(
-                    'key' => 'field_about_intro_link_type',
-                    'label' => '按钮链接类型',
-                    'name' => 'about_intro_link_type',
-                    'type' => 'select',
-                    'choices' => array(
-                        'popup' => 'Popup',
-                        'page' => 'Page URL',
-                    ),
-                    'default_value' => 'popup',
-                    'allow_null' => 0,
-                    'multiple' => 0,
-                    'ui' => 1,
-                    'return_format' => 'value',
-                ),
-                array(
-                    'key' => 'field_about_intro_popup_id',
-                    'label' => 'Popup ID',
-                    'name' => 'about_intro_popup_id',
-                    'type' => 'number',
-                    'default_value' => 306,
-                ),
-                array(
-                    'key' => 'field_about_intro_cta_url',
-                    'label' => '按钮链接地址',
-                    'name' => 'about_intro_cta_url',
-                    'type' => 'url',
                 ),
                 array(
                     'key' => 'field_about_intro_cta_label',
@@ -2681,7 +2593,7 @@ if (function_exists('acf_add_local_field_group')) {
      *
      * @return WP_Query
      */
-    function elysia_get_product_pages_query($paged = 1, $per_page = 12)
+    function elysia_get_product_pages_query($paged = 1, $per_page = 16)
     {
         $paged = max(1, (int) $paged);
         $per_page = max(1, (int) $per_page);

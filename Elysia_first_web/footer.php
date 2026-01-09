@@ -4,7 +4,6 @@
 <template id="tp-language" data-tp-language="en_US"></template>
 <script data-cfasync="false" src="<?php echo get_template_directory_uri(); ?>/static/js/email-decode.min.js"></script>
 <?php get_template_part('template-parts/components/popup-catalog-download'); ?>
-<?php get_template_part('template-parts/components/popup-product-inquiry'); ?>
 <script>
 	const lazyloadRunObserver = () => {
 		const lazyloadBackgrounds = document.querySelectorAll(`.e-con.e-parent:not(.e-lazyloaded)`);

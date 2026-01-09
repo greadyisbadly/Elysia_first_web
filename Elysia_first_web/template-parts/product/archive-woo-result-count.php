@@ -12,7 +12,7 @@
     }
 
     if (function_exists('elysia_get_product_pages_query')) {
-        $elysia_query = elysia_get_product_pages_query($elysia_paged, 12);
+        $elysia_query = elysia_get_product_pages_query($elysia_paged, 16);
         if ($elysia_query instanceof WP_Query) {
             $elysia_total = (int) $elysia_query->found_posts;
             $elysia_per_page = (int) $elysia_query->get('posts_per_page');

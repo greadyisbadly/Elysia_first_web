@@ -48,12 +48,16 @@ get_header();
 <link rel='stylesheet' id='e-popup-css' href='<?php echo get_template_directory_uri(); ?>/static/css/popup.min.css' media='all' />
 <link rel='stylesheet' id='elementor-icons-css' href='<?php echo get_template_directory_uri(); ?>/static/css/elementor-icons.min.css' media='all' />
 <link rel='stylesheet' id='elementor-post-5-css' href='<?php echo get_template_directory_uri(); ?>/static/css/post-5.css' media='all' />
+<link rel='stylesheet' id='elementor-post-306-css' href='<?php echo get_template_directory_uri(); ?>/static/css/post-306.css' media='all' />
+<link rel='stylesheet' id='e-animation-fadeInUp-css' href='<?php echo get_template_directory_uri(); ?>/static/css/fadeInUp.min.css' media='all' />
+<link rel='stylesheet' id='e-animation-fadeIn-css' href='<?php echo get_template_directory_uri(); ?>/static/css/fadeIn.min.css' media='all' />
 <link rel='stylesheet' id='e-animation-zoomIn-css' href='<?php echo get_template_directory_uri(); ?>/static/css/zoomIn.min.css' media='all' />
 <link rel='stylesheet' id='swiper-css' href='<?php echo get_template_directory_uri(); ?>/static/css/swiper.min.css' media='all' />
 <link rel='stylesheet' id='e-swiper-css' href='<?php echo get_template_directory_uri(); ?>/static/css/e-swiper.min.css' media='all' />
 <link rel='stylesheet' id='widget-divider-css' href='<?php echo get_template_directory_uri(); ?>/static/css/widget-divider.min.css' media='all' />
 <link rel='stylesheet' id='elementor-gf-local-roboto-css' href='<?php echo get_template_directory_uri(); ?>/static/css/roboto.css' media='all' />
 <link rel='stylesheet' id='elementor-gf-local-robotoslab-css' href='<?php echo get_template_directory_uri(); ?>/static/css/robotoslab.css' media='all' />
+<link rel='stylesheet' id='elementor-gf-local-redhatmono-css' href='<?php echo get_template_directory_uri(); ?>/static/css/redhatmono.css' media='all' />
 <link rel='stylesheet' id='elementor-icons-shared-0-css' href='<?php echo get_template_directory_uri(); ?>/static/css/fontawesome.min.css' media='all' />
 <link rel='stylesheet' id='elementor-icons-fa-solid-css' href='<?php echo get_template_directory_uri(); ?>/static/css/solid.min.css' media='all' />
 <link rel='stylesheet' id='elementor-icons-fa-brands-css' href='<?php echo get_template_directory_uri(); ?>/static/css/brands.min.css' media='all' />
@@ -124,4 +128,6 @@ get_header();
 </main>
 
 <?php
+get_template_part('template-parts/one_page/shared-contact-popup');
+
 get_footer();

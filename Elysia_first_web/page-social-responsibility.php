@@ -36,5 +36,7 @@ get_header();
 </main>
 
 <?php
+get_template_part('template-parts/one_page/shared-contact-popup');
+
 get_footer();
 ?>

@@ -10,9 +10,12 @@
                             <?php get_template_part('template-parts/product/archive', 'woo-result-count'); ?>
                             <ul class="products elementor-grid columns-4" data-products="type-1" data-hover="swap">
                                 <?php
-                                // 通过统一函数获取使用“产品详情”模板的页面列表，作为产品数据源
                                 $elysia_paged = function_exists('elysia_get_product_list_paged') ? elysia_get_product_list_paged() : 1;
-                                $elysia_query = function_exists('elysia_get_product_pages_query') ? elysia_get_product_pages_query($elysia_paged, 12) : null;
+                                $elysia_query = function_exists('elysia_get_product_pages_query') ? elysia_get_product_pages_query($elysia_paged, 16) : null;
+
+                                if ($elysia_query instanceof WP_Query) {
+                                    $GLOBALS['elysia_product_pages_query'] = $elysia_query;
+                                }
 
                                 if ($elysia_query instanceof WP_Query && $elysia_query->have_posts()) {
                                     while ($elysia_query->have_posts()) {

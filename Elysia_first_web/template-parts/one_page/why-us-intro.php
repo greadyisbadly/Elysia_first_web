@@ -3,10 +3,6 @@ $why_intro_eyebrow = '';
 $why_intro_title = '';
 $why_intro_body = '';
 $why_intro_cta_text = '';
-$why_intro_cta_type = '';
-$why_intro_cta_popup_id = null;
-$why_intro_cta_page = null;
-$why_intro_cta_custom_url = '';
 $why_intro_image_main = null;
 $why_intro_image_secondary = null;
 
@@ -31,26 +27,6 @@ if (function_exists('get_field')) {
         $why_intro_cta_text = (string) $field_value;
     }
 
-    $field_value = get_field('why_intro_cta_type');
-    if ($field_value) {
-        $why_intro_cta_type = (string) $field_value;
-    }
-
-    $field_value = get_field('why_intro_cta_popup_id');
-    if ($field_value !== null && $field_value !== '') {
-        $why_intro_cta_popup_id = (int) $field_value;
-    }
-
-    $field_value = get_field('why_intro_cta_page');
-    if ($field_value) {
-        $why_intro_cta_page = $field_value;
-    }
-
-    $field_value = get_field('why_intro_cta_custom_url');
-    if ($field_value) {
-        $why_intro_cta_custom_url = (string) $field_value;
-    }
-
     $image_field = get_field('why_intro_image_main');
     if (is_array($image_field) && !empty($image_field['url'])) {
         $why_intro_image_main = $image_field;
@@ -69,29 +45,7 @@ if (!$has_left && !$has_right) {
     return;
 }
 
-$why_intro_cta_href = '';
-
-if ($why_intro_cta_type === 'popup' && $why_intro_cta_popup_id) {
-    $popup_id_value = (string) $why_intro_cta_popup_id;
-    $settings_array = array(
-        'id' => $popup_id_value,
-        'toggle' => false,
-    );
-    if (function_exists('wp_json_encode')) {
-        $settings_json = wp_json_encode($settings_array);
-    } else {
-        $settings_json = json_encode($settings_array);
-    }
-    if ($settings_json) {
-        $why_intro_cta_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3D' . rawurlencode(base64_encode($settings_json));
-    }
-} elseif ($why_intro_cta_type === 'contact_page' && $why_intro_cta_page) {
-    if (function_exists('get_permalink')) {
-        $why_intro_cta_href = get_permalink($why_intro_cta_page);
-    }
-} elseif ($why_intro_cta_type === 'custom_url' && $why_intro_cta_custom_url !== '') {
-    $why_intro_cta_href = $why_intro_cta_custom_url;
-}
+$why_intro_cta_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjMwNiIsInRvZ2dsZSI6ZmFsc2V9';
 ?>
 <section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-b0cbd04 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="b0cbd04" data-element_type="section">
     <div class="elementor-container elementor-column-gap-default">

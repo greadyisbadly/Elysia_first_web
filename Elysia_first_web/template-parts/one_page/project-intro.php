@@ -71,10 +71,10 @@ if (!$elysia_project_intro_has_acf) {
                     <div class="elementor-widget-container">
                         <div class="elementor-button-wrapper">
                             <?php
-                            $cta_btn_url  = get_option('elysia_footer_cta_button_url', home_url('/contact/'));
                             $cta_btn_text = get_option('elysia_footer_cta_button_text', __('INQUIRY NOW', 'elysia_first_web'));
+                            $cta_btn_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjMwNiIsInRvZ2dsZSI6ZmFsc2V9';
                             ?>
-                            <a class="elementor-button elementor-button-link elementor-size-md" href="<?php echo esc_url($cta_btn_url); ?>">
+                            <a class="elementor-button elementor-button-link elementor-size-md" href="<?php echo esc_url($cta_btn_href); ?>">
                                 <span class="elementor-button-content-wrapper">
                                     <span class="elementor-button-text"><?php echo esc_html($cta_btn_text); ?></span>
                                 </span>

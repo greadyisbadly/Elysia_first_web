@@ -4,7 +4,6 @@ $elysia_quality_intro_title = '';
 $elysia_quality_intro_text = '';
 $elysia_quality_intro_image = null;
 $elysia_quality_intro_button_text = '';
-$elysia_quality_intro_popup_id = '';
 
 if (function_exists('get_field')) {
     $field_value = get_field('quality_intro_badge');
@@ -31,24 +30,10 @@ if (function_exists('get_field')) {
     if ($field_value) {
         $elysia_quality_intro_button_text = $field_value;
     }
-
-    $field_value = get_field('quality_intro_contact_popup_id');
-    if ($field_value) {
-        $elysia_quality_intro_popup_id = $field_value;
-    }
 }
 
-$elysia_quality_intro_button_has_popup = $elysia_quality_intro_button_text !== '' && $elysia_quality_intro_popup_id !== '';
-$elysia_quality_intro_popup_href = '';
-
-if ($elysia_quality_intro_button_has_popup) {
-    $elysia_quality_intro_popup_settings = array(
-        'id' => $elysia_quality_intro_popup_id,
-        'toggle' => false,
-    );
-
-    $elysia_quality_intro_popup_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3D' . rawurlencode(base64_encode(wp_json_encode($elysia_quality_intro_popup_settings)));
-}
+$elysia_quality_intro_button_has_popup = $elysia_quality_intro_button_text !== '';
+$elysia_quality_intro_popup_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjMwNiIsInRvZ2dsZSI6ZmFsc2V9';
 ?>
 <section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-681a35c1 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="681a35c1" data-element_type="section">
     <div class="elementor-container elementor-column-gap-custom">

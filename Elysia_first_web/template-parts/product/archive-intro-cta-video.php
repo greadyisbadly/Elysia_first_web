@@ -62,7 +62,7 @@
                     <div class="elementor-widget-container">
                         <?php
                         $elysia_cta_label = 'CONTACT US';
-                        $elysia_cta_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjM0MyIsInRvZ2dsZSI6ZmFsc2V9';
+                        $elysia_cta_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjMwNiIsInRvZ2dsZSI6ZmFsc2V9';
                         if (function_exists('get_field')) {
                             $elysia_label_field = get_field('elysia_product_archive_cta_label');
                             if (!$elysia_label_field) {
@@ -70,17 +70,6 @@
                             }
                             if ($elysia_label_field) {
                                 $elysia_cta_label = $elysia_label_field;
-                            }
-                            $elysia_cta_page = get_field('elysia_product_archive_cta_page');
-                            $elysia_cta_action = get_field('elysia_product_archive_cta_action_url');
-                            if (!$elysia_cta_page && !$elysia_cta_action) {
-                                $elysia_cta_page = get_field('elysia_product_archive_cta_page', 'option');
-                                $elysia_cta_action = get_field('elysia_product_archive_cta_action_url', 'option');
-                            }
-                            if ($elysia_cta_page) {
-                                $elysia_cta_href = get_permalink($elysia_cta_page);
-                            } elseif ($elysia_cta_action) {
-                                $elysia_cta_href = $elysia_cta_action;
                             }
                         }
                         ?>
