@@ -3,6 +3,8 @@
 get_header();
 ?>
 
+<link rel='stylesheet' id='elementor-post-598-css' href='<?php echo get_template_directory_uri(); ?>/static/css/post-598.css' media='all' />
+
 <?php if (have_posts()) : ?>
     <?php while (have_posts()) : the_post(); ?>
         <main id="main" class="site-main hfeed" itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
