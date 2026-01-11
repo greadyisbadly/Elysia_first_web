@@ -49,31 +49,24 @@ if (!is_array($elysia_featured_products)) {
                         $elysia_product_title = get_the_title($elysia_product_id);
                         $elysia_product_link = get_permalink($elysia_product_id);
                         $elysia_image_id = function_exists('elysia_get_product_card_image_id') ? elysia_get_product_card_image_id($elysia_product_id) : 0;
-                        $elysia_product_image = '';
+                        $elysia_primary_image_url = '';
                         if ($elysia_image_id) {
-                            $elysia_product_image = wp_get_attachment_image(
-                                $elysia_image_id,
-                                'medium',
-                                false,
-                                array(
-                                    'loading' => 'lazy',
-                                    'class' => 'ct-swap',
-                                    'style' => 'aspect-ratio: 1/1;',
-                                )
-                            );
+                            $elysia_primary_image_url = wp_get_attachment_image_url($elysia_image_id, 'medium_large');
                         }
                 ?>
-                        <li <?php post_class('product', $elysia_product_id); ?>>
+                        <li class="product type-product elementor-grid-item">
                             <figure>
                                 <a class="ct-media-container has-hover-effect" href="<?php echo esc_url($elysia_product_link); ?>" aria-label="<?php echo esc_attr($elysia_product_title); ?>">
-                                    <?php
-                                    if ($elysia_product_image) {
-                                        echo $elysia_product_image;
-                                        echo $elysia_product_image;
-                                    }
-                                    ?>
+                                    <?php if ($elysia_primary_image_url) { ?>
+                                        <img loading="lazy" width="400" height="400" src="<?php echo esc_url($elysia_primary_image_url); ?>" alt="<?php echo esc_attr($elysia_product_title); ?>" class="wp-post-image" style="aspect-ratio: 1/1;" />
+                                    <?php } ?>
                                 </a>
                             </figure>
+                            <h2 class="woocommerce-loop-product__title">
+                                <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="<?php echo esc_url($elysia_product_link); ?>" target="_self">
+                                    <?php echo esc_html($elysia_product_title); ?>
+                                </a>
+                            </h2>
                             <div class="ct-woo-card-actions" data-add-to-cart="auto-hide" data-alignment="equal">
                                 <div class="woocommerce-loop-product__buttons">
                                     <a href="<?php echo esc_url($elysia_product_link); ?>" class="button product_type_simple">

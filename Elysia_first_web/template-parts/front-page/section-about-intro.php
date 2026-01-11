@@ -106,8 +106,6 @@ $button_link = get_field('about_intro_button_link');
                     <div class="elementor-widget-container">
                         <?php if ($description): ?>
                             <?php echo $description; ?>
-                        <?php else: ?>
-                            <p>We are professional manufacturer and exporter that are concerned with the design, development and production of cold roll forming machines. All products comply with international quality standards and are greatly appreciated in a variety of different markets throughout the world.</p>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -236,11 +234,11 @@ $button_link = get_field('about_intro_button_link');
                                                     <span><?php echo esc_html($highlight_title); ?></span>
                                                 </h3>
                                                 <p class="elementor-icon-box-description">
-                                                    <?php if ($highlight_desc): ?>
-                                                        <?php echo $highlight_desc; ?>
-                                                    <?php else: ?>
-                                                        Our machines feature beautiful appearance, long service life, good performance, simple operation, reasonable price, good quality and so on. Strong technical resources are the most stable guarantee for our products' quality.
-                                                    <?php endif; ?>
+                                                    <?php
+                                                    if ($highlight_desc) {
+                                                        echo $highlight_desc;
+                                                    }
+                                                    ?>
                                                 </p>
                                             </div>
                                         </div>

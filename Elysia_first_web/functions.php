@@ -473,9 +473,9 @@ add_filter('single_template', 'elysia_first_web_solution_single_template');
 function elysia_first_web_get_social_links()
 {
     return array(
-        'facebook'  => get_option('elysia_social_facebook', 'https://www.facebook.com/wuxisunway'),
-        'youtube'   => get_option('elysia_social_youtube', 'https://www.youtube.com/@sunwayforming'),
-        'instagram' => get_option('elysia_social_instagram', 'https://www.instagram.com/wuxisunway/'),
+        'facebook'  => function_exists('get_field') ? (get_field('global_facebook_url', 'option') ?: get_option('elysia_social_facebook', 'https://www.facebook.com/wuxisunway')) : get_option('elysia_social_facebook', 'https://www.facebook.com/wuxisunway'),
+        'youtube'   => function_exists('get_field') ? (get_field('global_youtube_url', 'option') ?: get_option('elysia_social_youtube', 'https://www.youtube.com/@sunwayforming')) : get_option('elysia_social_youtube', 'https://www.youtube.com/@sunwayforming'),
+        'instagram' => function_exists('get_field') ? (get_field('global_instagram_url', 'option') ?: get_option('elysia_social_instagram', 'https://www.instagram.com/wuxisunway/')) : get_option('elysia_social_instagram', 'https://www.instagram.com/wuxisunway/'),
     );
 }
 // 获取页脚联系方式配置（电话、邮箱、地址）
@@ -1043,6 +1043,24 @@ if (function_exists('acf_add_local_field_group')) {
             'key' => 'group_elysia_global_contact_info',
             'title' => 'Global Contact Info',
             'fields' => array(
+                array(
+                    'key' => 'field_global_facebook_url',
+                    'label' => 'Facebook 链接',
+                    'name' => 'global_facebook_url',
+                    'type' => 'url',
+                ),
+                array(
+                    'key' => 'field_global_youtube_url',
+                    'label' => 'YouTube 链接',
+                    'name' => 'global_youtube_url',
+                    'type' => 'url',
+                ),
+                array(
+                    'key' => 'field_global_instagram_url',
+                    'label' => 'Instagram 链接',
+                    'name' => 'global_instagram_url',
+                    'type' => 'url',
+                ),
                 array(
                     'key' => 'field_global_tel_label',
                     'label' => '电话标签',
@@ -1809,6 +1827,49 @@ if (function_exists('acf_add_local_field_group')) {
                         'param' => 'page_template',
                         'operator' => '==',
                         'value' => 'page-about-us.php',
+                    ),
+                ),
+            ),
+        )
+    );
+
+    acf_add_local_field_group(
+        array(
+            'key' => 'group_elysia_front_page_about_intro',
+            'title' => 'Front Page - 关于我们简介',
+            'fields' => array(
+                array(
+                    'key' => 'field_front_about_intro_description',
+                    'label' => '关于我们详情介绍',
+                    'name' => 'about_intro_description',
+                    'type' => 'wysiwyg',
+                    'tabs' => 'all',
+                    'toolbar' => 'full',
+                    'media_upload' => 1,
+                    'default_value' => '<p>We are professional manufacturer and exporter that are concerned with the design, development and production of cold roll forming machines. All products comply with international quality standards and are greatly appreciated in a variety of different markets throughout the world.</p>',
+                ),
+                array(
+                    'key' => 'field_front_about_intro_highlight_desc',
+                    'label' => '高亮区介绍文案',
+                    'name' => 'about_intro_highlight_desc',
+                    'type' => 'wysiwyg',
+                    'tabs' => 'all',
+                    'toolbar' => 'full',
+                    'media_upload' => 1,
+                    'default_value' => 'Our machines feature beautiful appearance, long service life, good performance, simple operation, reasonable price, good quality and so on. Strong technical resources are the most stable guarantee for our products&#039; quality.',
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'post_type',
+                        'operator' => '==',
+                        'value' => 'page',
+                    ),
+                    array(
+                        'param' => 'page_template',
+                        'operator' => '==',
+                        'value' => 'front-page.php',
                     ),
                 ),
             ),
@@ -2604,6 +2665,9 @@ if (function_exists('acf_add_local_field_group')) {
                     $image_id = (int) $first;
                 }
             }
+        }
+        if (!$image_id && function_exists('has_post_thumbnail') && has_post_thumbnail($post_id)) {
+            $image_id = (int) get_post_thumbnail_id($post_id);
         }
         return $image_id;
     }
