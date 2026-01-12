@@ -88,7 +88,7 @@ if ($elysia_detail_post_id > 0) {
                 <div class="elementor-column elementor-col-30 elementor-top-column elementor-element elementor-element-4cf90785" data-id="4cf90785" data-element_type="column">
                     <div class="elementor-widget-wrap elementor-element-populated">
                         <?php get_template_part('template-parts/components/toc'); ?>
-                        <?php get_template_part('template-parts/components/share-buttons'); ?>
+                        <?php get_template_part('template-parts/blog/blog', 'sidebar-share'); ?>
                         <?php get_template_part('template-parts/blog_detail/blog-detail', 'sidebar-latest'); ?>
                         <?php get_template_part('template-parts/blog_detail/blog-detail', 'sidebar-contact'); ?>
                     </div>

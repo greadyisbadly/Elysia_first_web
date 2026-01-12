@@ -17,53 +17,19 @@ if (function_exists('get_field')) {
     <div class="elementor-container elementor-column-gap-default">
         <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-elysia-share-column" data-id="elysia-share-column" data-element_type="column">
             <div class="elementor-widget-wrap elementor-element-populated">
-                <div class="elementor-element elementor-element-elysia-share-heading elementor-widget elementor-widget-heading" data-id="elysia-share-heading" data-element_type="widget" data-widget_type="heading.default">
-                    <div class="elementor-widget-container">
-                        <h4 class="elementor-heading-title elementor-size-default">
-                            <?php echo esc_html($elysia_share_title); ?>
-                        </h4>
-                    </div>
-                </div>
-                <div class="elementor-element elementor-element-elysia-share-buttons elementor-share-buttons--view-icon elementor-share-buttons--skin-gradient elementor-share-buttons--shape-square elementor-grid-0 elementor-share-buttons--color-official elementor-widget elementor-widget-share-buttons" data-id="elysia-share-buttons" data-element_type="widget" data-widget_type="share-buttons.default">
-                    <div class="elementor-widget-container">
-                        <div class="elementor-grid" role="list">
-                            <div class="elementor-grid-item" role="listitem">
-                                <a class="elementor-share-btn elementor-share-btn_facebook" href="#" role="button" tabindex="0" aria-label="Share on Facebook">
-                                    <span class="elementor-share-btn__icon">
-                                        <i class="fab fa-facebook" aria-hidden="true"></i>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="elementor-grid-item" role="listitem">
-                                <a class="elementor-share-btn elementor-share-btn_twitter" href="#" role="button" tabindex="0" aria-label="Share on Twitter">
-                                    <span class="elementor-share-btn__icon">
-                                        <i class="fab fa-twitter" aria-hidden="true"></i>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="elementor-grid-item" role="listitem">
-                                <a class="elementor-share-btn elementor-share-btn_linkedin" href="#" role="button" tabindex="0" aria-label="Share on LinkedIn">
-                                    <span class="elementor-share-btn__icon">
-                                        <i class="fab fa-linkedin" aria-hidden="true"></i>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="elementor-grid-item" role="listitem">
-                                <a class="elementor-share-btn elementor-share-btn_whatsapp" href="#" role="button" tabindex="0" aria-label="Share on WhatsApp">
-                                    <span class="elementor-share-btn__icon">
-                                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="elementor-grid-item" role="listitem">
-                                <a class="elementor-share-btn elementor-share-btn_email" href="#" role="button" tabindex="0" aria-label="Share by Email">
-                                    <span class="elementor-share-btn__icon">
-                                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                                    </span>
-                                </a>
-                            </div>
+                <div class="elysia-detail-share-inline">
+                    <div class="elementor-element elementor-element-elysia-share-heading elementor-widget elementor-widget-heading" data-id="elysia-share-heading" data-element_type="widget" data-widget_type="heading.default">
+                        <div class="elementor-widget-container">
+                            <h4 class="elementor-heading-title elementor-size-default">
+                                <?php echo esc_html($elysia_share_title); ?>
+                            </h4>
                         </div>
                     </div>
+                    <?php
+                    $GLOBALS['elysia_share_hide_title'] = true;
+                    get_template_part('template-parts/blog/blog', 'sidebar-share');
+                    unset($GLOBALS['elysia_share_hide_title']);
+                    ?>
                 </div>
             </div>
         </div>

@@ -358,6 +358,77 @@ img {
     text-align: center;
 }
 
+/* ==========================================================================
+   8. Article Content Tables (Solution / Blog Detail)
+   ========================================================================== */
+.elysia-article-content .wp-block-table,
+.elysia-article-content table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 2rem 0;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.elysia-article-content .wp-block-table table {
+    width: 100%;
+}
+
+.elysia-article-content table thead {
+    background-color: #f5f7fb;
+}
+
+.elysia-article-content table th,
+.elysia-article-content table td {
+    border: 1px solid #dde2eb;
+    padding: 12px 16px;
+    vertical-align: top;
+}
+
+.elysia-article-content table th {
+    font-weight: 600;
+    text-align: left;
+    color: #1c1f2a;
+}
+
+.elysia-article-content table td {
+    color: #4b5065;
+}
+
+.elysia-article-content table strong {
+    font-weight: 600;
+}
+
+/* 小屏幕时允许横向滚动，避免表格挤压 */
+.elysia-article-content .wp-block-table,
+.elysia-article-content .table-scroll {
+    overflow-x: auto;
+}
+
+.elysia-article-content .wp-block-table>table {
+    min-width: 600px;
+}
+
+/* Blog sidebar share buttons spacing (reuse archive page layout on detail page) */
+.elementor-element.elementor-element-9d4bb6d {
+    --grid-side-margin: 10px;
+    --grid-column-gap: 10px;
+    --grid-row-gap: 10px;
+    --grid-bottom-margin: 10px;
+}
+
+.elysia-detail-share-inline {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.elysia-detail-share-inline .elementor-heading-title {
+    margin-bottom: 0;
+}
+
 .elementor-525 .elementor-element.elementor-element-9517402>.elementor-widget-container {
     margin: -30px -20px 0 -20px;
 }

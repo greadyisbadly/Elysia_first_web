@@ -17,6 +17,10 @@ if ($elysia_blog_page_id && function_exists('get_field')) {
         }
     }
 }
+$elysia_share_show_title = true;
+if (isset($GLOBALS['elysia_share_hide_title']) && $GLOBALS['elysia_share_hide_title']) {
+    $elysia_share_show_title = false;
+}
 $elysia_encoded_url = rawurlencode($elysia_share_url);
 $elysia_encoded_text = rawurlencode($elysia_share_text);
 $elysia_facebook_url = 'https://www.facebook.com/sharer/sharer.php?u=' . $elysia_encoded_url;
@@ -25,11 +29,13 @@ $elysia_linkedin_url = 'https://www.linkedin.com/shareArticle?mini=true&url=' . 
 $elysia_whatsapp_url = 'https://api.whatsapp.com/send?text=' . $elysia_encoded_text . '%20' . $elysia_encoded_url;
 $elysia_email_url = 'mailto:?subject=' . $elysia_encoded_text . '&body=' . $elysia_encoded_url;
 ?>
-<div class="elementor-element elementor-element-6be9620a elementor-widget elementor-widget-heading" data-id="6be9620a" data-element_type="widget" data-widget_type="heading.default">
-    <div class="elementor-widget-container">
-        <h4 class="elementor-heading-title elementor-size-default"><?php echo esc_html($elysia_share_title); ?></h4>
+<?php if ($elysia_share_show_title) { ?>
+    <div class="elementor-element elementor-element-6be9620a elementor-widget elementor-widget-heading" data-id="6be9620a" data-element_type="widget" data-widget_type="heading.default">
+        <div class="elementor-widget-container">
+            <h4 class="elementor-heading-title elementor-size-default"><?php echo esc_html($elysia_share_title); ?></h4>
+        </div>
     </div>
-</div>
+<?php } ?>
 <div class="elementor-element elementor-element-9d4bb6d elementor-share-buttons--view-icon elementor-share-buttons--skin-gradient elementor-share-buttons--shape-square elementor-grid-0 elementor-share-buttons--color-official elementor-widget elementor-widget-share-buttons" data-id="9d4bb6d" data-element_type="widget" data-widget_type="share-buttons.default">
     <div class="elementor-widget-container">
         <div class="elementor-grid" role="list">
