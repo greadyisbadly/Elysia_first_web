@@ -2,10 +2,8 @@
 // 产品详情页：顶部概要信息模块模板
 $product_id = get_the_ID();
 $product_title = get_the_title();
-$product_subtitle = '';
 $hero_short_description = '';
 if (function_exists('get_field')) {
-    $product_subtitle = get_field('product_subtitle', $product_id);
     $hero_short_description = get_field('hero_short_description', $product_id);
 }
 $short_description = '';
@@ -15,14 +13,31 @@ if ($hero_short_description) {
     $short_description = get_the_excerpt($product_id);
 }
 $categories_html = '';
-$terms = get_the_terms($product_id, 'category');
+$terms = get_the_terms($product_id, 'product_category');
 if (!is_wp_error($terms) && !empty($terms)) {
-    $links = array();
+    $primary_term = null;
     foreach ($terms as $term) {
-        $links[] = '<a href="' . esc_url(get_term_link($term)) . '" rel="tag">' . esc_html($term->name) . '</a>';
+        if ($term->parent) {
+            $primary_term = $term;
+            break;
+        }
     }
-    if (!empty($links)) {
-        $categories_html = implode(', ', $links);
+    if (!$primary_term) {
+        $primary_term = reset($terms);
+    }
+    if ($primary_term instanceof WP_Term) {
+        $big_term = null;
+        if ($primary_term->parent) {
+            $big_term = get_term($primary_term->parent, 'product_category');
+        }
+        $links = array();
+        if ($big_term && !is_wp_error($big_term) && $big_term->term_id !== $primary_term->term_id) {
+            $links[] = '<a href="' . esc_url(get_term_link($big_term)) . '" rel="tag">' . esc_html($big_term->name) . '</a>';
+        }
+        $links[] = '<a href="' . esc_url(get_term_link($primary_term)) . '" rel="tag">' . esc_html($primary_term->name) . '</a>';
+        if (!empty($links)) {
+            $categories_html = implode(', ', $links);
+        }
     }
 }
 ?>
@@ -34,11 +49,6 @@ if (!is_wp_error($terms) && !empty($terms)) {
         <h1 class="product_title entry-title elementor-heading-title elementor-size-default">
             <?php echo esc_html($product_title); ?>
         </h1>
-        <?php if ($product_subtitle) : ?>
-            <p class="product-subtitle">
-                <?php echo esc_html($product_subtitle); ?>
-            </p>
-        <?php endif; ?>
     </div>
 </div>
 
