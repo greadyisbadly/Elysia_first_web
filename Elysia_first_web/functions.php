@@ -3312,6 +3312,13 @@ if (function_exists('acf_add_local_field_group')) {
                     'default_value' => 'Previous',
                 ),
                 array(
+                    'key' => 'field_blog_detail_next_label',
+                    'label' => '下一篇标签文案',
+                    'name' => 'blog_detail_next_label',
+                    'type' => 'text',
+                    'default_value' => 'Next',
+                ),
+                array(
                     'key' => 'field_blog_detail_related_badge',
                     'label' => '相关文章分割线文字',
                     'name' => 'blog_detail_related_badge',

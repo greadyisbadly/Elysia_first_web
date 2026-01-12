@@ -11,7 +11,12 @@ $features = get_field('feature_media_list');
 $button_text = get_field('feature_media_button_text') ?: 'EXPLORE MORE';
 $button_link = get_field('feature_media_button_link');
 $image_id = get_field('feature_media_image');
-$video_url = get_field('feature_media_video_url');
+$video_url_raw = get_field('feature_media_video_url');
+
+$video_url = $video_url_raw;
+if ($video_url && function_exists('elysia_get_youtube_embed_url')) {
+    $video_url = elysia_get_youtube_embed_url($video_url);
+}
 
 // Split features into two columns
 $features_1 = [];
