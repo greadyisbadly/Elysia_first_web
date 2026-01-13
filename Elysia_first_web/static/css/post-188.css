@@ -194,7 +194,6 @@
 
 .elementor-188 .elementor-element.elementor-element-6bf40fa:not(.elementor-widget-image) .elementor-widget-container,
 .elementor-188 .elementor-element.elementor-element-6bf40fa.elementor-widget-image .elementor-widget-container img {
-    -webkit-mask-image: url(https://swforming.com/wp-content/plugins/elementor/assets/mask-shapes/circle.svg );
     -webkit-mask-size: contain;
     -webkit-mask-position: center center;
     -webkit-mask-repeat: no-repeat;
@@ -222,7 +221,6 @@ body.rtl .elementor-188 .elementor-element.elementor-element-cc48102 {
 
 .elementor-188 .elementor-element.elementor-element-cc48102:not(.elementor-widget-image) .elementor-widget-container,
 .elementor-188 .elementor-element.elementor-element-cc48102.elementor-widget-image .elementor-widget-container img {
-    -webkit-mask-image: url(https://swforming.com/wp-content/plugins/elementor/assets/mask-shapes/circle.svg );
     -webkit-mask-size: contain;
     -webkit-mask-position: center center;
     -webkit-mask-repeat: no-repeat;

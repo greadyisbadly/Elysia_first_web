@@ -28,11 +28,11 @@ function elysia_first_web_site_logo()
             loading="lazy"
             width="322"
             height="123"
-            src="<?php echo esc_url(get_template_directory_uri() . '/static/image/SUNWAY.png'); ?>"
+            src="<?php echo esc_url(get_template_directory_uri() . '/static/image/sunway.png'); ?>"
             class="default-logo"
             alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
             decoding="async"
-            srcset="https://swforming.com/wp-content/uploads/2022/08/SUNWAY.png 322w, https://swforming.com/wp-content/uploads/2022/08/SUNWAY-300x115.png 300w"
+            srcset="<?php echo esc_url(get_template_directory_uri() . '/static/image/sunway.png'); ?> 322w, <?php echo esc_url(get_template_directory_uri() . '/static/image/SUNWAY-300x115.png'); ?> 300w"
             sizes="(max-width: 322px) 100vw, 322px" />
     </a>
     <?php

@@ -82,21 +82,21 @@
                                     <figure class='gallery-item'>
                                         <div class='gallery-icon landscape'>
                                             <a data-elementor-open-lightbox="no" href='<?php echo get_template_directory_uri(); ?>/static/image/factory-01.webp'>
-                                                <img loading="lazy" width="600" height="350" src="<?php echo get_template_directory_uri(); ?>/static/image/factory-01.webp" class="attachment-medium_large size-medium_large" alt="" decoding="async" srcset="https://swforming.com/wp-content/uploads/2022/09/factory-01.webp 600w, https://swforming.com/wp-content/uploads/2022/09/factory-01-300x175.webp 300w" sizes="(max-width: 600px) 100vw, 600px" />
+                                                <img loading="lazy" width="600" height="350" src="<?php echo get_template_directory_uri(); ?>/static/image/factory-01.webp" class="attachment-medium_large size-medium_large" alt="" decoding="async" srcset="<?php echo get_template_directory_uri(); ?>/static/image/factory-01.webp 600w" sizes="(max-width: 600px) 100vw, 600px" />
                                             </a>
                                         </div>
                                     </figure>
                                     <figure class='gallery-item'>
                                         <div class='gallery-icon landscape'>
                                             <a data-elementor-open-lightbox="no" href='<?php echo get_template_directory_uri(); ?>/static/image/factory-02.webp'>
-                                                <img loading="lazy" width="600" height="350" src="<?php echo get_template_directory_uri(); ?>/static/image/factory-02.webp" class="attachment-medium_large size-medium_large" alt="" decoding="async" srcset="https://swforming.com/wp-content/uploads/2022/09/factory-02.webp 600w, https://swforming.com/wp-content/uploads/2022/09/factory-02-300x175.webp 300w" sizes="(max-width: 600px) 100vw, 600px" />
+                                                <img loading="lazy" width="600" height="350" src="<?php echo get_template_directory_uri(); ?>/static/image/factory-02.webp" class="attachment-medium_large size-medium_large" alt="" decoding="async" srcset="<?php echo get_template_directory_uri(); ?>/static/image/factory-02.webp 600w" sizes="(max-width: 600px) 100vw, 600px" />
                                             </a>
                                         </div>
                                     </figure>
                                     <figure class='gallery-item'>
                                         <div class='gallery-icon landscape'>
                                             <a data-elementor-open-lightbox="no" href='<?php echo get_template_directory_uri(); ?>/static/image/factory-03.webp'>
-                                                <img loading="lazy" width="600" height="350" src="<?php echo get_template_directory_uri(); ?>/static/image/factory-03.webp" class="attachment-medium_large size-medium_large" alt="" decoding="async" srcset="https://swforming.com/wp-content/uploads/2022/09/factory-03.webp 600w, https://swforming.com/wp-content/uploads/2022/09/factory-03-300x175.webp 300w" sizes="(max-width: 600px) 100vw, 600px" />
+                                                <img loading="lazy" width="600" height="350" src="<?php echo get_template_directory_uri(); ?>/static/image/factory-03.webp" class="attachment-medium_large size-medium_large" alt="" decoding="async" srcset="<?php echo get_template_directory_uri(); ?>/static/image/factory-03.webp 600w" sizes="(max-width: 600px) 100vw, 600px" />
                                             </a>
                                         </div>
                                     </figure>

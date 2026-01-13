@@ -71,7 +71,7 @@ endif;
                     src="<?php echo get_template_directory_uri(); ?>/static/image/847d9113-da5c-4d74-b4b0-9ab333cc4af3.jpg"
                     alt="Cable Ladder Roll Forming Machine" width="1000" height="1200"
                     title="Cable Ladder Roll Forming Machine 7"
-                    srcset="https://swforming.com/wp-content/uploads/2022/09/847d9113-da5c-4d74-b4b0-9ab333cc4af3.jpg 1000w, https://swforming.com/wp-content/uploads/2022/09/847d9113-da5c-4d74-b4b0-9ab333cc4af3-600x720.jpg 600w, https://swforming.com/wp-content/uploads/2022/09/847d9113-da5c-4d74-b4b0-9ab333cc4af3-250x300.jpg 250w, https://swforming.com/wp-content/uploads/2022/09/847d9113-da5c-4d74-b4b0-9ab333cc4af3-853x1024.jpg 853w, https://swforming.com/wp-content/uploads/2022/09/847d9113-da5c-4d74-b4b0-9ab333cc4af3-768x922.jpg 768w"
+                    srcset="<?php echo get_template_directory_uri(); ?>/static/image/847d9113-da5c-4d74-b4b0-9ab333cc4af3.jpg 1000w"
                     sizes="(max-width: 1000px) 100vw, 1000px" />
             </p>
 
@@ -99,7 +99,7 @@ endif;
                     src="<?php echo get_template_directory_uri(); ?>/static/image/0d870081134f8ffa8903d985f863f80.jpg"
                     alt="0d870081134f8ffa8903d985f863f80" width="1000" height="1129"
                     title="Cable Ladder Roll Forming Machine 8"
-                    srcset="https://swforming.com/wp-content/uploads/2022/09/0d870081134f8ffa8903d985f863f80.jpg 1000w, https://swforming.com/wp-content/uploads/2022/09/0d870081134f8ffa8903d985f863f80-600x677.jpg 600w, https://swforming.com/wp-content/uploads/2022/09/0d870081134f8ffa8903d985f863f80-266x300.jpg 266w, https://swforming.com/wp-content/uploads/2022/09/0d870081134f8ffa8903d985f863f80-907x1024.jpg 907w, https://swforming.com/wp-content/uploads/2022/09/0d870081134f8ffa8903d985f863f80-768x867.jpg 768w"
+                    srcset="<?php echo get_template_directory_uri(); ?>/static/image/0d870081134f8ffa8903d985f863f80.jpg 1000w"
                     sizes="(max-width: 1000px) 100vw, 1000px" />
             </p>
 
@@ -108,7 +108,7 @@ endif;
                     src="<?php echo get_template_directory_uri(); ?>/static/image/2e3621f887a2a8c0f1ea6202bfd1fe5.jpg"
                     alt="2e3621f887a2a8c0f1ea6202bfd1fe5" width="1000" height="498"
                     title="Cable Ladder Roll Forming Machine 9"
-                    srcset="https://swforming.com/wp-content/uploads/2022/09/2e3621f887a2a8c0f1ea6202bfd1fe5.jpg 1000w, https://swforming.com/wp-content/uploads/2022/09/2e3621f887a2a8c0f1ea6202bfd1fe5-600x299.jpg 600w, https://swforming.com/wp-content/uploads/2022/09/2e3621f887a2a8c0f1ea6202bfd1fe5-300x149.jpg 300w, https://swforming.com/wp-content/uploads/2022/09/2e3621f887a2a8c0f1ea6202bfd1fe5-768x382.jpg 768w"
+                    srcset="<?php echo get_template_directory_uri(); ?>/static/image/2e3621f887a2a8c0f1ea6202bfd1fe5.jpg 1000w"
                     sizes="(max-width: 1000px) 100vw, 1000px" />
             </p>
 
@@ -118,7 +118,7 @@ endif;
                     src="<?php echo get_template_directory_uri(); ?>/static/image/H4f7152219d7c41e88d3e328526b62a8eU.webp"
                     alt="H4f7152219d7c41e88d3e328526b62a8eU" width="1748" height="1001"
                     title="Cable Ladder Roll Forming Machine 10"
-                    srcset="https://swforming.com/wp-content/uploads/2022/09/H4f7152219d7c41e88d3e328526b62a8eU.webp 1748w, https://swforming.com/wp-content/uploads/2022/09/H4f7152219d7c41e88d3e328526b62a8eU-600x344.webp 600w, https://swforming.com/wp-content/uploads/2022/09/H4f7152219d7c41e88d3e328526b62a8eU-300x172.webp 300w, https://swforming.com/wp-content/uploads/2022/09/H4f7152219d7c41e88d3e328526b62a8eU-1024x586.webp 1024w, https://swforming.com/wp-content/uploads/2022/09/H4f7152219d7c41e88d3e328526b62a8eU-768x440.webp 768w, https://swforming.com/wp-content/uploads/2022/09/H4f7152219d7c41e88d3e328526b62a8eU-1536x880.webp 1536w"
+                    srcset="<?php echo get_template_directory_uri(); ?>/static/image/H4f7152219d7c41e88d3e328526b62a8eU.webp 1748w"
                     sizes="(max-width: 1748px) 100vw, 1748px" />
             </p>
 
@@ -128,7 +128,7 @@ endif;
                     src="<?php echo get_template_directory_uri(); ?>/static/image/20220920151511.png"
                     alt="20220920151511" width="1118" height="2190"
                     title="Cable Ladder Roll Forming Machine 11"
-                    srcset="https://swforming.com/wp-content/uploads/2022/09/20220920151511.png 1118w, https://swforming.com/wp-content/uploads/2022/09/20220920151511-600x1175.png 600w, https://swforming.com/wp-content/uploads/2022/09/20220920151511-153x300.png 153w, https://swforming.com/wp-content/uploads/2022/09/20220920151511-523x1024.png 523w, https://swforming.com/wp-content/uploads/2022/09/20220920151511-768x1504.png 768w, https://swforming.com/wp-content/uploads/2022/09/20220920151511-784x1536.png 784w, https://swforming.com/wp-content/uploads/2022/09/20220920151511-1046x2048.png 1046w"
+                    srcset="<?php echo get_template_directory_uri(); ?>/static/image/20220920151511.png 1118w"
                     sizes="(max-width: 1118px) 100vw, 1118px" />
             </p>
 
@@ -352,7 +352,7 @@ endif;
                         src="<?php echo get_template_directory_uri(); ?>/static/image/20220920152129.png"
                         alt="20220920152129" width="1000" height="1114"
                         title="Cable Ladder Roll Forming Machine 12"
-                        srcset="https://swforming.com/wp-content/uploads/2022/09/20220920152129.png 1000w, https://swforming.com/wp-content/uploads/2022/09/20220920152129-600x668.png 600w, https://swforming.com/wp-content/uploads/2022/09/20220920152129-269x300.png 269w, https://swforming.com/wp-content/uploads/2022/09/20220920152129-919x1024.png 919w, https://swforming.com/wp-content/uploads/2022/09/20220920152129-768x856.png 768w"
+                        srcset="<?php echo get_template_directory_uri(); ?>/static/image/20220920152129.png 1000w"
                         sizes="(max-width: 1000px) 100vw, 1000px" />
                 </div>
 

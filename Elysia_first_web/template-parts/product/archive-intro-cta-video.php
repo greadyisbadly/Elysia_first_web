@@ -85,7 +85,7 @@
                 <div class="elementor-element elementor-element-9c037d2 elementor-mobile-align-left elementor-align-left elementor-widget__width-auto elementor-widget elementor-widget-button" data-id="9c037d2" data-element_type="widget" data-widget_type="button.default">
                     <div class="elementor-widget-container">
                         <?php
-                        $elysia_catalog_url = 'https://swforming.com/wp-content/uploads/2022/10/Sunway-Product-Catalog.pdf';
+                        $elysia_catalog_url = get_template_directory_uri() . '/static/file/Sunway-Product-Catalog.pdf';
                         $elysia_catalog_label = 'Download cataloge';
                         if (function_exists('get_field')) {
                             $elysia_catalog_file = get_field('elysia_product_archive_catalog_file');

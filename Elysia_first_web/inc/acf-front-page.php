@@ -131,10 +131,11 @@ if (function_exists('acf_add_local_field_group')) {
 				'sub_fields' => array(
 					array(
 						'key' => 'field_stats_item_icon',
-						'label' => '图标',
+						'label' => '图标 SVG 代码',
 						'name' => 'icon',
-						'type' => 'image',
-						'return_format' => 'id',
+						'type' => 'textarea',
+						'rows' => 6,
+						'new_lines' => '',
 					),
 					array(
 						'key' => 'field_stats_item_number',
@@ -192,10 +193,11 @@ if (function_exists('acf_add_local_field_group')) {
 				'sub_fields' => array(
 					array(
 						'key' => 'field_about_intro_stat_icon',
-						'label' => '统计图标',
+						'label' => '统计图标 SVG 代码',
 						'name' => 'icon',
-						'type' => 'image',
-						'return_format' => 'id',
+						'type' => 'textarea',
+						'rows' => 6,
+						'new_lines' => '',
 					),
 					array(
 						'key' => 'field_about_intro_stat_number',
@@ -251,10 +253,11 @@ if (function_exists('acf_add_local_field_group')) {
 					),
 					array(
 						'key' => 'field_category_grid_item_icon',
-						'label' => '图标/SVG',
+						'label' => '图标 SVG 代码',
 						'name' => 'icon',
-						'type' => 'image',
-						'return_format' => 'id',
+						'type' => 'textarea',
+						'rows' => 6,
+						'new_lines' => '',
 					),
 					array(
 						'key' => 'field_category_grid_item_title',
@@ -270,12 +273,9 @@ if (function_exists('acf_add_local_field_group')) {
 					),
 					array(
 						'key' => 'field_category_grid_item_category',
-						'label' => '绑定产品分类',
-						'name' => 'category',
-						'type' => 'taxonomy',
-						'taxonomy' => 'product_category',
-						'field_type' => 'select',
-						'return_format' => 'id',
+						'label' => '跳转链接',
+						'name' => 'link',
+						'type' => 'url',
 					),
 				),
 			),
@@ -409,10 +409,11 @@ if (function_exists('acf_add_local_field_group')) {
 				'sub_fields' => array(
 					array(
 						'key' => 'field_service_icon',
-						'label' => '图标',
+						'label' => '图标 SVG 代码',
 						'name' => 'icon',
-						'type' => 'image',
-						'return_format' => 'id',
+						'type' => 'textarea',
+						'rows' => 6,
+						'new_lines' => '',
 					),
 					array(
 						'key' => 'field_service_title',

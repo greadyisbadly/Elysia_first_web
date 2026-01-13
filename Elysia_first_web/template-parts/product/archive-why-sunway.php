@@ -267,7 +267,7 @@
             <div class="elementor-widget-wrap elementor-element-populated">
                 <div class="elementor-element elementor-element-79c31cf3 elementor-widget elementor-widget-image" data-id="79c31cf3" data-element_type="widget" data-widget_type="image.default">
                     <div class="elementor-widget-container">
-                        <img loading="lazy" width="600" height="450" src="<?php echo get_template_directory_uri(); ?>/static/image/sunway.jpg" class="attachment-large size-large wp-image-105" alt="roll forming machine manufacturer" srcset="https://swforming.com/wp-content/uploads/2022/08/sunway.jpg 600w, https://swforming.com/wp-content/uploads/2022/08/sunway-300x225.jpg 300w" sizes="(max-width: 600px) 100vw, 600px" />
+                        <img loading="lazy" width="600" height="450" src="<?php echo get_template_directory_uri(); ?>/static/image/sunway.jpg" class="attachment-large size-large wp-image-105" alt="roll forming machine manufacturer" srcset="<?php echo esc_url(get_template_directory_uri() . '/static/image/sunway.jpg'); ?> 600w, <?php echo esc_url(get_template_directory_uri() . '/static/image/sunway-300x225.jpg'); ?> 300w" sizes="(max-width: 600px) 100vw, 600px" />
                     </div>
                 </div>
             </div>

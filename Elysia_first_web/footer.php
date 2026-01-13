@@ -50,10 +50,10 @@
 <link rel='stylesheet' id='wc-blocks-style-css' href='<?php echo get_template_directory_uri(); ?>/static/css/wc-blocks.css' media='all' />
 <script id="ct-scripts-js-extra">
 	var ct_localizations = {
-		"ajax_url": "https://swforming.com/wp-admin/admin-ajax.php",
-		"public_url": "https://swforming.com/wp-content/themes/blocksy/static/bundle/",
-		"rest_url": "https://swforming.com/wp-json/",
-		"search_url": "https://swforming.com/search/QUERY_STRING/",
+		"ajax_url": "<?php echo esc_url(admin_url('admin-ajax.php')); ?>",
+		"public_url": "<?php echo esc_url(get_template_directory_uri() . '/static/bundle/'); ?>",
+		"rest_url": "<?php echo esc_url(get_rest_url()); ?>",
+		"search_url": "<?php echo esc_url(home_url('/search/QUERY_STRING/')); ?>",
 		"show_more_text": "Show more",
 		"more_text": "More",
 		"search_live_results": "Search results",
@@ -72,33 +72,33 @@
 		"dynamic_js_chunks": [{
 			"id": "blocksy_pro_micro_popups",
 			"selector": ".ct-popup",
-			"url": "https://swforming.com/wp-content/plugins/blocksy-companion-pro/framework/premium/static/bundle/micro-popups.js?ver=2.1.22"
+			"url": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/framework/premium/static/bundle/micro-popups.js?ver=2.1.22')); ?>"
 		}, {
 			"id": "blocksy_sticky_header",
 			"selector": "header [data-sticky]",
-			"url": "https://swforming.com/wp-content/plugins/blocksy-companion-pro/static/bundle/sticky.js?ver=2.1.22"
+			"url": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/static/bundle/sticky.js?ver=2.1.22')); ?>"
 		}],
 		"dynamic_styles": {
-			"lazy_load": "https://swforming.com/wp-content/themes/blocksy/static/bundle/non-critical-styles.min.css?ver=2.1.22",
-			"search_lazy": "https://swforming.com/wp-content/themes/blocksy/static/bundle/non-critical-search-styles.min.css?ver=2.1.22",
-			"back_to_top": "https://swforming.com/wp-content/themes/blocksy/static/bundle/back-to-top.min.css?ver=2.1.22",
-			"cookie_notification": "https://swforming.com/wp-content/plugins/blocksy-companion-pro/framework/extensions/cookies-consent/static/bundle/main.min.css"
+			"lazy_load": "<?php echo esc_url(home_url('/wp-content/themes/blocksy/static/bundle/non-critical-styles.min.css?ver=2.1.22')); ?>",
+			"search_lazy": "<?php echo esc_url(home_url('/wp-content/themes/blocksy/static/bundle/non-critical-search-styles.min.css?ver=2.1.22')); ?>",
+			"back_to_top": "<?php echo esc_url(home_url('/wp-content/themes/blocksy/static/bundle/back-to-top.min.css?ver=2.1.22')); ?>",
+			"cookie_notification": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/framework/extensions/cookies-consent/static/bundle/main.min.css')); ?>"
 		},
 		"dynamic_styles_selectors": [{
 			"selector": ".ct-header-cart, #woo-cart-panel",
-			"url": "https://swforming.com/wp-content/themes/blocksy/static/bundle/cart-header-element-lazy.min.css?ver=2.1.22"
+			"url": "<?php echo esc_url(home_url('/wp-content/themes/blocksy/static/bundle/cart-header-element-lazy.min.css?ver=2.1.22')); ?>"
 		}, {
 			"selector": ".flexy",
-			"url": "https://swforming.com/wp-content/themes/blocksy/static/bundle/flexy.min.css?ver=2.1.22"
+			"url": "<?php echo esc_url(home_url('/wp-content/themes/blocksy/static/bundle/flexy.min.css?ver=2.1.22')); ?>"
 		}, {
 			"selector": ".ct-media-container[data-media-id], .ct-dynamic-media[data-media-id]",
-			"url": "https://swforming.com/wp-content/plugins/blocksy-companion-pro/framework/premium/static/bundle/video-lazy.min.css?ver=2.1.22"
+			"url": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/framework/premium/static/bundle/video-lazy.min.css?ver=2.1.22')); ?>"
 		}, {
 			"selector": "#account-modal",
-			"url": "https://swforming.com/wp-content/plugins/blocksy-companion-pro/static/bundle/header-account-modal-lazy.min.css?ver=2.1.22"
+			"url": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/static/bundle/header-account-modal-lazy.min.css?ver=2.1.22')); ?>"
 		}, {
 			"selector": ".ct-header-account",
-			"url": "https://swforming.com/wp-content/plugins/blocksy-companion-pro/static/bundle/header-account-dropdown-lazy.min.css?ver=2.1.22"
+			"url": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/static/bundle/header-account-dropdown-lazy.min.css?ver=2.1.22')); ?>"
 		}]
 	};
 </script>
@@ -108,7 +108,7 @@
 <script src="<?php echo get_template_directory_uri(); ?>/static/js/core.min.js" id="jquery-ui-core-js"></script>
 <script id="elementor-frontend-js-extra">
 	var EAELImageMaskingConfig = {
-		"svg_dir_url": "https://swforming.com/wp-content/plugins/essential-addons-for-elementor-lite/assets/front-end/img/image-masking/svg-shapes/"
+		"svg_dir_url": "<?php echo esc_url(plugins_url('assets/front-end/img/image-masking/svg-shapes/', 'essential-addons-for-elementor-lite/essential-addons-for-elementor-lite.php')); ?>"
 	};
 </script>
 <script id="elementor-frontend-js-before">
@@ -207,9 +207,9 @@
 			"e_pro_variables": true
 		},
 		"urls": {
-			"assets": "https:\/\/swforming.com\/wp-content\/plugins\/elementor\/assets\/",
-			"ajaxurl": "https:\/\/swforming.com\/wp-admin\/admin-ajax.php",
-			"uploadUrl": "https:\/\/swforming.com\/wp-content\/uploads"
+			"assets": "<?php echo esc_url(plugins_url('assets/', 'elementor/elementor.php')); ?>",
+			"ajaxurl": "<?php echo esc_url(admin_url('admin-ajax.php')); ?>",
+			"uploadUrl": "<?php echo esc_url(content_url('uploads')); ?>"
 		},
 		"nonces": {
 			"floatingButtonsClickTracking": "2eaca8aae2"
@@ -243,7 +243,7 @@
 <script async src="<?php echo get_template_directory_uri(); ?>/static/js/main-1.js" id="blocksy-ext-cookies-consent-scripts-js"></script>
 <script id="eael-general-js-extra">
 	var localize = {
-		"ajaxurl": "https://swforming.com/wp-admin/admin-ajax.php",
+		"ajaxurl": "<?php echo esc_url(admin_url('admin-ajax.php')); ?>",
 		"nonce": "735f5a4668",
 		"i18n": {
 			"added": "Added ",
@@ -330,11 +330,11 @@
 </script>
 <script id="elementor-pro-frontend-js-before">
 	var ElementorProFrontendConfig = {
-		"ajaxurl": "https:\/\/swforming.com\/wp-admin\/admin-ajax.php",
+		"ajaxurl": "<?php echo esc_url(admin_url('admin-ajax.php')); ?>",
 		"nonce": "fd7a51cec7",
 		"urls": {
-			"assets": "https:\/\/swforming.com\/wp-content\/plugins\/elementor-pro\/assets\/",
-			"rest": "https:\/\/swforming.com\/wp-json\/"
+			"assets": "<?php echo esc_url(plugins_url('assets/', 'elementor-pro/elementor-pro.php')); ?>",
+			"rest": "<?php echo esc_url(get_rest_url()); ?>"
 		},
 		"settings": {
 			"lazy_load_background_images": true
@@ -415,8 +415,8 @@
 		},
 		"woocommerce": {
 			"menu_cart": {
-				"cart_page_url": "https:\/\/swforming.com",
-				"checkout_page_url": "https:\/\/swforming.com",
+				"cart_page_url": "<?php echo esc_url(home_url('/cart/')); ?>",
+				"checkout_page_url": "<?php echo esc_url(home_url('/checkout/')); ?>",
 				"fragments_nonce": "83775d6929"
 			}
 		},
@@ -425,7 +425,7 @@
 			"app_id": ""
 		},
 		"lottie": {
-			"defaultAnimationUrl": "https:\/\/swforming.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"
+			"defaultAnimationUrl": "<?php echo esc_url(plugins_url('modules/lottie/assets/animations/default.json', 'elementor-pro/elementor-pro.php')); ?>"
 		}
 	};
 </script>

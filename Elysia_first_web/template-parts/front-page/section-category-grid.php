@@ -11,31 +11,18 @@ $items = [];
 if ($raw_items) {
 	foreach ($raw_items as $row) {
 		$image_id = isset($row['image']) ? (int) $row['image'] : 0;
-		$icon_id = isset($row['icon']) ? (int) $row['icon'] : 0;
+		$icon_svg = isset($row['icon']) ? $row['icon'] : '';
 		$item_title = isset($row['title']) ? $row['title'] : '';
 		$description = isset($row['description']) ? $row['description'] : '';
-		$category = isset($row['category']) ? $row['category'] : 0;
-
-		$link = '';
-		if ($category) {
-			$term_id = is_object($category) ? $category->term_id : (int) $category;
-			$term = get_term($term_id, 'product_category');
-			if ($term && !is_wp_error($term)) {
-				$link = get_term_link($term);
-				if (empty($item_title)) {
-					$item_title = $term->name;
-				}
-			}
-		}
-
-		if (!$link || is_wp_error($link)) {
+		$link = isset($row['link']) ? $row['link'] : '';
+		if (!$link) {
 			$link = '#';
 		}
 
 		$items[] = [
 			'image'       => $image_id,
 			'link'        => $link,
-			'icon'        => $icon_id,
+			'icon'        => $icon_svg,
 			'title'       => $item_title,
 			'description' => $description,
 			'button_text' => 'READ MORE',
@@ -87,7 +74,7 @@ if ($raw_items) {
 				<?php foreach ($chunk as $item_index => $item):
 					$image_id = $item['image'];
 					$link = $item['link'];
-					$icon_id = $item['icon'];
+					$icon_svg = $item['icon'];
 					$item_title = $item['title'];
 					$description = $item['description'];
 					$button_text = $item['button_text'] ?: 'READ MORE';
@@ -131,14 +118,8 @@ if ($raw_items) {
 														<div class="elementor-icon-box-icon">
 															<span class="elementor-icon">
 																<?php
-																if ($icon_id) {
-																	$file_path = get_attached_file($icon_id);
-																	$ext = pathinfo($file_path, PATHINFO_EXTENSION);
-																	if (strtolower($ext) === 'svg') {
-																		echo file_get_contents($file_path);
-																	} else {
-																		echo wp_get_attachment_image($icon_id, 'full', false, ['class' => 'icon']);
-																	}
+																if ($icon_svg && strpos($icon_svg, '<svg') !== false) {
+																	echo $icon_svg;
 																}
 																?>
 															</span>

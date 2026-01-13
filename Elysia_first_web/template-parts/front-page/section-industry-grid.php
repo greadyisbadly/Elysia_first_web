@@ -9,12 +9,12 @@
 					data-id="85721ef" data-element_type="widget"
 					data-widget_type="image.default">
 					<div class="elementor-widget-container">
-						<a href="https://swforming.com/product-category/steel-structure/">
+						<a href="<?php echo esc_url(home_url('/product-category/steel-structure/')); ?>">
 							<img loading="lazy" loading="lazy" decoding="async" width="711"
 								height="400" src="<?php echo get_template_directory_uri(); ?>/static/image/Ibnj4mTBPE.jpg"
 								class="attachment-large size-large wp-image-4235"
 								alt="Ibnj4mTBPE"
-								srcset="https://swforming.com/wp-content/uploads/2023/11/Ibnj4mTBPE.jpg 711w, https://swforming.com/wp-content/uploads/2023/11/Ibnj4mTBPE-600x338.jpg 600w, https://swforming.com/wp-content/uploads/2023/11/Ibnj4mTBPE-300x169.jpg 300w, https://swforming.com/wp-content/uploads/2023/11/Ibnj4mTBPE-18x10.jpg 18w"
+								srcset="<?php echo get_template_directory_uri(); ?>/static/image/Ibnj4mTBPE.jpg 711w"
 								sizes="(max-width: 711px) 100vw, 711px" title="Home 5"> </a>
 					</div>
 				</div>
@@ -76,7 +76,7 @@
 									<div class="elementor-widget-container">
 										<div class="elementor-button-wrapper">
 											<a class="elementor-button elementor-button-link elementor-size-sm"
-												href="https://swforming.com/product-category/steel-structure/">
+												href="<?php echo esc_url(home_url('/product-category/steel-structure/')); ?>">
 												<span
 													class="elementor-button-content-wrapper">
 													<span class="elementor-button-text">READ
@@ -100,12 +100,12 @@
 					data-widget_type="image.default">
 					<div class="elementor-widget-container">
 						<a
-							href="https://swforming.com/product-category/metal-wall-roofing/">
+							href="<?php echo esc_url(home_url('/product-category/metal-wall-roofing/')); ?>">
 							<img loading="lazy" loading="lazy" decoding="async" width="711"
 								height="400" src="<?php echo get_template_directory_uri(); ?>/static/image/Metal-Wall.jpg"
 								class="attachment-large size-large wp-image-4236"
 								alt="Metal Wall"
-								srcset="https://swforming.com/wp-content/uploads/2023/11/Metal-Wall.jpg 711w, https://swforming.com/wp-content/uploads/2023/11/Metal-Wall-600x338.jpg 600w, https://swforming.com/wp-content/uploads/2023/11/Metal-Wall-300x169.jpg 300w, https://swforming.com/wp-content/uploads/2023/11/Metal-Wall-18x10.jpg 18w"
+								srcset="<?php echo get_template_directory_uri(); ?>/static/image/Metal-Wall.jpg 711w"
 								sizes="(max-width: 711px) 100vw, 711px" title="Home 6"> </a>
 					</div>
 				</div>
@@ -165,7 +165,7 @@
 									<div class="elementor-widget-container">
 										<div class="elementor-button-wrapper">
 											<a class="elementor-button elementor-button-link elementor-size-sm"
-												href="https://swforming.com/product-category/metal-wall-roofing/">
+												href="<?php echo esc_url(home_url('/product-category/metal-wall-roofing/')); ?>">
 												<span
 													class="elementor-button-content-wrapper">
 													<span class="elementor-button-text">READ
@@ -189,12 +189,12 @@
 					data-widget_type="image.default">
 					<div class="elementor-widget-container">
 						<a
-							href="https://swforming.com/product-category/highway-engineering-vehicle/">
+							href="<?php echo esc_url(home_url('/product-category/highway-engineering-vehicle/')); ?>">
 							<img loading="lazy" loading="lazy" decoding="async" width="711"
 								height="400" src="<?php echo get_template_directory_uri(); ?>/static/image/HZ70nRk7Ns.jpg"
 								class="attachment-large size-large wp-image-4234"
 								alt="HZ70nRk7Ns"
-								srcset="https://swforming.com/wp-content/uploads/2023/11/HZ70nRk7Ns.jpg 711w, https://swforming.com/wp-content/uploads/2023/11/HZ70nRk7Ns-600x338.jpg 600w, https://swforming.com/wp-content/uploads/2023/11/HZ70nRk7Ns-300x169.jpg 300w, https://swforming.com/wp-content/uploads/2023/11/HZ70nRk7Ns-18x10.jpg 18w"
+								srcset="<?php echo get_template_directory_uri(); ?>/static/image/HZ70nRk7Ns.jpg 711w"
 								sizes="(max-width: 711px) 100vw, 711px" title="Home 7"> </a>
 					</div>
 				</div>
@@ -263,7 +263,7 @@
 									<div class="elementor-widget-container">
 										<div class="elementor-button-wrapper">
 											<a class="elementor-button elementor-button-link elementor-size-sm"
-												href="https://swforming.com/product-category/highway-engineering-vehicle/">
+												href="<?php echo esc_url(home_url('/product-category/highway-engineering-vehicle/')); ?>">
 												<span
 													class="elementor-button-content-wrapper">
 													<span class="elementor-button-text">READ

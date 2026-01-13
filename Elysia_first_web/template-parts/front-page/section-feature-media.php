@@ -18,6 +18,8 @@ if ($video_url && function_exists('elysia_get_youtube_embed_url')) {
     $video_url = elysia_get_youtube_embed_url($video_url);
 }
 
+$video_embed_url = $video_url ?: '';
+
 // Split features into two columns
 $features_1 = [];
 $features_2 = [];
@@ -28,19 +30,6 @@ if ($features) {
     $features_2 = array_slice($features, $mid);
 }
 
-// Generate Video Lightbox URL
-$video_action_url = '#';
-if ($video_url) {
-    // Detect video type (simple check)
-    $video_type = (strpos($video_url, 'youtube') !== false || strpos($video_url, 'youtu.be') !== false) ? 'youtube' : 'hosted';
-    // Elementor Lightbox settings
-    $settings = [
-        'type' => 'video',
-        'videoType' => $video_type,
-        'url' => $video_url
-    ];
-    $video_action_url = '#elementor-action:action=lightbox&settings=' . base64_encode(json_encode($settings));
-}
 ?>
 
 <section data-particle_enable="false" data-particle-mobile-disabled="false"
@@ -188,18 +177,24 @@ if ($video_url) {
                     data-widget_type="icon.default">
                     <div class="elementor-widget-container">
                         <div class="elementor-icon-wrapper">
-                            <a class="elementor-icon"
-                                href="<?php echo esc_attr($video_action_url); ?>">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" class="icon"
-                                    viewBox="0 0 1024 1024" width="200" height="200">
-                                    <path
-                                        d="M852.041143 463.389257L248.714971 59.274971a58.397257 58.397257 0 0 0-32.533942-9.903542c-9.450057 0-27.662629 2.282057-36.293486 6.904685-19.061029 10.166857-39.701943 30.017829-39.701943 51.6096v808.228572c0 21.6064 20.640914 41.442743 39.701943 51.6096 8.645486 4.608 22.484114 6.904686 31.919543 6.904685 11.395657 0 24.956343-3.335314 34.757485-9.903542l604.452572-404.114286c16.223086-10.8544 26.536229-29.096229 26.536228-48.610743s-9.289143-37.756343-25.512228-48.610743zM198.699886 916.114286V107.885714L802.0992 512 198.699886 916.114286z"
-                                        fill=""></path>
-                                    <path
-                                        d="M685.992229 498.658743a14.687086 14.687086 0 0 0 20.319085-4.008229 14.6432 14.6432 0 0 0-4.022857-20.304457l-294.853486-197.485714a14.628571 14.628571 0 1 0-16.296228 24.312686l294.853486 197.485714zM340.743314 267.424914a14.613943 14.613943 0 0 0 20.304457-4.008228 14.657829 14.657829 0 0 0-4.008228-20.304457l-70.568229-47.250286a14.6432 14.6432 0 0 0-16.296228 24.312686l70.568228 47.250285z"
-                                        fill=""></path>
-                                </svg> </a>
+                            <?php if ($video_embed_url): ?>
+                                <a class="elementor-icon feature-media-video-trigger"
+                                    href="#"
+                                    data-video-url="<?php echo esc_url($video_embed_url); ?>">
+                                <?php else: ?>
+                                    <a class="elementor-icon"
+                                        href="#">
+                                    <?php endif; ?>
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" class="icon"
+                                        viewBox="0 0 1024 1024" width="200" height="200">
+                                        <path
+                                            d="M852.041143 463.389257L248.714971 59.274971a58.397257 58.397257 0 0 0-32.533942-9.903542c-9.450057 0-27.662629 2.282057-36.293486 6.904685-19.061029 10.166857-39.701943 30.017829-39.701943 51.6096v808.228572c0 21.6064 20.640914 41.442743 39.701943 51.6096 8.645486 4.608 22.484114 6.904686 31.919543 6.904685 11.395657 0 24.956343-3.335314 34.757485-9.903542l604.452572-404.114286c16.223086-10.8544 26.536229-29.096229 26.536228-48.610743s-9.289143-37.756343-25.512228-48.610743zM198.699886 916.114286V107.885714L802.0992 512 198.699886 916.114286z"
+                                            fill=""></path>
+                                        <path
+                                            d="M685.992229 498.658743a14.687086 14.687086 0 0 0 20.319085-4.008229 14.6432 14.6432 0 0 0-4.022857-20.304457l-294.853486-197.485714a14.628571 14.628571 0 1 0-16.296228 24.312686l294.853486 197.485714zM340.743314 267.424914a14.613943 14.613943 0 0 0 20.304457-4.008228 14.657829 14.657829 0 0 0-4.008228-20.304457l-70.568229-47.250286a14.6432 14.6432 0 0 0-16.296228 24.312686l70.568228 47.250285z"
+                                            fill=""></path>
+                                    </svg> </a>
                         </div>
                     </div>
                 </div>
@@ -207,3 +202,146 @@ if ($video_url) {
         </div>
     </div>
 </section>
+
+<?php if ($video_embed_url): ?>
+    <div id="feature-media-video-modal" class="feature-media-video-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="feature-media-video-dialog">
+            <button type="button" class="feature-media-video-close" aria-label="关闭视频">×</button>
+            <div class="feature-media-video-iframe-wrapper"></div>
+        </div>
+    </div>
+
+    <style>
+        .feature-media-video-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .feature-media-video-modal.is-open {
+            display: flex;
+        }
+
+        .feature-media-video-dialog {
+            position: relative;
+            max-width: 960px;
+            width: 90%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .feature-media-video-iframe-wrapper {
+            position: relative;
+            padding-top: 56.25%;
+            background-color: #000;
+        }
+
+        .feature-media-video-iframe-wrapper iframe,
+        .feature-media-video-iframe-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .feature-media-video-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            z-index: 2;
+            background: transparent;
+            border: 0;
+            color: #fff;
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        body.feature-media-video-modal-open {
+            overflow: hidden;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var trigger = document.querySelector('.feature-media-video-trigger');
+            var modal = document.getElementById('feature-media-video-modal');
+            if (!trigger || !modal) {
+                return;
+            }
+            var iframeWrapper = modal.querySelector('.feature-media-video-iframe-wrapper');
+            var closeButton = modal.querySelector('.feature-media-video-close');
+
+            function openFeatureMediaModal() {
+                var url = trigger.getAttribute('data-video-url');
+                if (!url) {
+                    return;
+                }
+                var child = null;
+                if (url.indexOf('.mp4') !== -1 || url.indexOf('.webm') !== -1 || url.indexOf('.ogg') !== -1) {
+                    var video = document.createElement('video');
+                    video.src = url;
+                    video.controls = true;
+                    video.autoplay = true;
+                    video.playsInline = true;
+                    child = video;
+                } else {
+                    var iframe = document.createElement('iframe');
+                    var finalUrl = url;
+                    if (finalUrl.indexOf('youtube.com/embed') !== -1 || finalUrl.indexOf('player.vimeo.com/video') !== -1) {
+                        finalUrl += finalUrl.indexOf('?') === -1 ? '?autoplay=1' : '&autoplay=1';
+                    }
+                    iframe.src = finalUrl;
+                    iframe.setAttribute('frameborder', '0');
+                    iframe.setAttribute('allow', 'autoplay; encrypted-media');
+                    iframe.setAttribute('allowfullscreen', 'allowfullscreen');
+                    child = iframe;
+                }
+                iframeWrapper.innerHTML = '';
+                iframeWrapper.appendChild(child);
+                modal.classList.add('is-open');
+                document.body.classList.add('feature-media-video-modal-open');
+                modal.setAttribute('aria-hidden', 'false');
+            }
+
+            function closeFeatureMediaModal() {
+                modal.classList.remove('is-open');
+                document.body.classList.remove('feature-media-video-modal-open');
+                iframeWrapper.innerHTML = '';
+                modal.setAttribute('aria-hidden', 'true');
+            }
+
+            trigger.addEventListener('click', function(event) {
+                event.preventDefault();
+                openFeatureMediaModal();
+            });
+
+            if (closeButton) {
+                closeButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    closeFeatureMediaModal();
+                });
+            }
+
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeFeatureMediaModal();
+                }
+            });
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+                    closeFeatureMediaModal();
+                }
+            });
+        });
+    </script>
+<?php endif; ?>

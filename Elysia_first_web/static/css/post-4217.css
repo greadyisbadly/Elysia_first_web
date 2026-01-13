@@ -137,6 +137,12 @@
     margin-bottom: 0px;
 }
 
+.elementor-4217 .elementor-element.elementor-element-4cf8d02 .elementor-icon {
+    fill: var(--e-global-color-blocksy_palette_1);
+    color: var(--e-global-color-blocksy_palette_1);
+    border-color: var(--e-global-color-blocksy_palette_1);
+}
+
 .elementor-4217 .elementor-element.elementor-element-001ac27:not(.elementor-motion-effects-element-type-background)>.elementor-widget-wrap,
 .elementor-4217 .elementor-element.elementor-element-001ac27>.elementor-widget-wrap>.elementor-motion-effects-container>.elementor-motion-effects-layer {
     background-color: var(--e-global-color-blocksy_palette_1);
@@ -1057,7 +1063,7 @@
 
 .elementor-4217 .elementor-element.elementor-element-b0447e2:not(.elementor-widget-image) .elementor-widget-container,
 .elementor-4217 .elementor-element.elementor-element-b0447e2.elementor-widget-image .elementor-widget-container img {
-    -webkit-mask-image: url(https://swforming.com/wp-content/uploads/2023/11/rotated_clip_path_shape.svg );
+    -webkit-mask-image: url("../../static/image/rotated_clip_path_shape.svg");
     -webkit-mask-size: 100%;
     -webkit-mask-position: center center;
     -webkit-mask-repeat: no-repeat;

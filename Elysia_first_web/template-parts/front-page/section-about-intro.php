@@ -150,13 +150,9 @@ $button_link = get_field('about_intro_button_link');
                                     </div>
                                 </div>
 
-                                <!-- Stats Items -->
                                 <?php if ($stats): ?>
                                     <?php foreach ($stats as $index => $stat):
-                                        $icon_id = $stat['icon'] ?? '';
-                                        // Use original IDs if possible to maintain exact styling if IDs were targeted, 
-                                        // but Elementor usually targets classes.
-                                        // We will reuse the original widget structure.
+                                        $icon_svg = $stat['icon'] ?? '';
                                         $widget_id = ($index === 0) ? '38154e5' : 'ce8fd35';
                                     ?>
                                         <div class="elementor-element elementor-element-<?php echo $widget_id; ?> elementor-position-left elementor-view-default elementor-mobile-position-top elementor-widget elementor-widget-icon-box"
@@ -167,14 +163,8 @@ $button_link = get_field('about_intro_button_link');
                                                     <div class="elementor-icon-box-icon">
                                                         <span class="elementor-icon">
                                                             <?php
-                                                            if ($icon_id) {
-                                                                $file_path = get_attached_file($icon_id);
-                                                                $ext = pathinfo($file_path, PATHINFO_EXTENSION);
-                                                                if (strtolower($ext) === 'svg') {
-                                                                    echo file_get_contents($file_path);
-                                                                } else {
-                                                                    echo wp_get_attachment_image($icon_id, 'full', false, ['class' => 'icon']);
-                                                                }
+                                                            if ($icon_svg && strpos($icon_svg, '<svg') !== false) {
+                                                                echo $icon_svg;
                                                             }
                                                             ?>
                                                         </span>

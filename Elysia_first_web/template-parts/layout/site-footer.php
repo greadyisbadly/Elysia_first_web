@@ -64,24 +64,24 @@
 															<figure class='gallery-item'>
 																<div class='gallery-icon portrait'>
 																	<a data-elementor-open-lightbox="no"
-																		href='https://swforming.com/wp-content/uploads/2022/09/8aaadef8ad797f9f77f3f39f11a2928.jpg'><img
+																		href='<?php echo esc_url(get_template_directory_uri() . "/static/image/8aaadef8ad797f9f77f3f39f11a2928.jpg"); ?>'><img
 																			loading="lazy" width="213" height="300"
 																			src="<?php echo get_template_directory_uri(); ?>/static/image/8aaadef8ad797f9f77f3f39f11a2928-213x300.jpg"
 																			class="attachment-medium size-medium wp-post-image"
 																			alt="" decoding="async"
-																			srcset="https://swforming.com/wp-content/uploads/2022/09/8aaadef8ad797f9f77f3f39f11a2928-213x300.jpg 213w, https://swforming.com/wp-content/uploads/2022/09/8aaadef8ad797f9f77f3f39f11a2928.jpg 500w"
+																			srcset="<?php echo esc_url(get_template_directory_uri() . '/static/image/8aaadef8ad797f9f77f3f39f11a2928-213x300.jpg'); ?> 213w, <?php echo esc_url(get_template_directory_uri() . '/static/image/8aaadef8ad797f9f77f3f39f11a2928.jpg'); ?> 500w"
 																			sizes="(max-width: 213px) 100vw, 213px" /></a>
 																</div>
 															</figure>
 															<figure class='gallery-item'>
 																<div class='gallery-icon portrait'>
 																	<a data-elementor-open-lightbox="no"
-																		href='https://swforming.com/wp-content/uploads/2022/09/WUXI-SUNWAY-ISO-9001.jpg'><img
+																		href='<?php echo esc_url(get_template_directory_uri() . "/static/image/WUXI-SUNWAY-ISO-9001.jpg"); ?>'><img
 																			loading="lazy" width="213" height="300"
 																			src="<?php echo get_template_directory_uri(); ?>/static/image/WUXI-SUNWAY-ISO-9001-213x300.jpg"
 																			class="attachment-medium size-medium wp-post-image"
 																			alt="" decoding="async"
-																			srcset="https://swforming.com/wp-content/uploads/2022/09/WUXI-SUNWAY-ISO-9001-213x300.jpg 213w, https://swforming.com/wp-content/uploads/2022/09/WUXI-SUNWAY-ISO-9001.jpg 500w"
+																			srcset="<?php echo esc_url(get_template_directory_uri() . '/static/image/WUXI-SUNWAY-ISO-9001-213x300.jpg'); ?> 213w, <?php echo esc_url(get_template_directory_uri() . '/static/image/WUXI-SUNWAY-ISO-9001.jpg'); ?> 500w"
 																			sizes="(max-width: 213px) 100vw, 213px" /></a>
 																</div>
 															</figure>

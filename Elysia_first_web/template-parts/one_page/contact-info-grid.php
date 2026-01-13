@@ -130,7 +130,7 @@ if (function_exists('get_field')) {
                     <div class="elementor-widget-container">
                         <div class="elementor-icon-box-wrapper">
                             <div class="elementor-icon-box-icon">
-                                <a href="https://swforming.com/cdn-cgi/l/email-protection#ea998b868f99aa9d9f9283999f849d8b93c4898587" class="elementor-icon" tabindex="-1" aria-label="Email">
+                                <a href="#" class="elementor-icon" tabindex="-1" aria-label="Email">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon" viewBox="0 0 1024 1024" width="48" height="48">
                                         <defs>
                                             <style type="text/css">

@@ -47,7 +47,7 @@ $items = get_field('service_items');
                     data-id="37caa2f" data-element_type="section">
                     <div class="elementor-container elementor-column-gap-default" style="flex-wrap: wrap;">
                         <?php if ($items): foreach ($items as $index => $item):
-                                $icon_id = $item['icon'];
+                                $icon_svg = $item['icon'];
                                 $item_title = $item['title'];
                                 $description = $item['description'];
                                 // Generate unique ID for loop items
@@ -65,14 +65,8 @@ $items = get_field('service_items');
                                                     <div class="elementor-icon-box-icon">
                                                         <span class="elementor-icon">
                                                             <?php
-                                                            if ($icon_id) {
-                                                                $file_path = get_attached_file($icon_id);
-                                                                $ext = pathinfo($file_path, PATHINFO_EXTENSION);
-                                                                if (strtolower($ext) === 'svg') {
-                                                                    echo file_get_contents($file_path);
-                                                                } else {
-                                                                    echo wp_get_attachment_image($icon_id, 'full', false, ['class' => 'icon']);
-                                                                }
+                                                            if ($icon_svg && strpos($icon_svg, '<svg') !== false) {
+                                                                echo $icon_svg;
                                                             }
                                                             ?>
                                                         </span>

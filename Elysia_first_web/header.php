@@ -41,11 +41,13 @@
 	if (function_exists('has_site_icon') && has_site_icon()) {
 		wp_site_icon();
 	} else {
+		$elysia_fallback_icon = esc_url(get_template_directory_uri() . '/static/image/sunway.png');
+		$elysia_fallback_icon_small = esc_url(get_template_directory_uri() . '/static/image/sunway-100x100.png');
 		?>
-		<link rel="icon" href="https://swforming.com/wp-content/uploads/2022/09/sunway-100x100.png" sizes="32x32" />
-		<link rel="icon" href="https://swforming.com/wp-content/uploads/2022/09/sunway.png" sizes="192x192" />
-		<link rel="apple-touch-icon" href="https://swforming.com/wp-content/uploads/2022/09/sunway.png" />
-		<meta name="msapplication-TileImage" content="https://swforming.com/wp-content/uploads/2022/09/sunway.png" />
+		<link rel="icon" href="<?php echo $elysia_fallback_icon_small; ?>" sizes="32x32" />
+		<link rel="icon" href="<?php echo $elysia_fallback_icon; ?>" sizes="192x192" />
+		<link rel="apple-touch-icon" href="<?php echo $elysia_fallback_icon; ?>" />
+		<meta name="msapplication-TileImage" content="<?php echo $elysia_fallback_icon; ?>" />
 	<?php
 	}
 	?>

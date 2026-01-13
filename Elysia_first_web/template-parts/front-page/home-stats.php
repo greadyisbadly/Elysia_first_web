@@ -66,7 +66,7 @@ $stats_items = get_field('stats_items'); // Repeater
                             data-id="<?php echo $section_id; ?>" data-element_type="section">
                             <div class="elementor-container elementor-column-gap-default">
                                 <?php foreach ($chunk as $item_index => $item) { 
-                                    $icon_id = $item['icon'] ?? '';
+                                    $icon_svg = $item['icon'] ?? '';
                                     $number = $item['number'];
                                     $label = $item['label'];
                                     // 简单的 ID 模拟
@@ -84,14 +84,8 @@ $stats_items = get_field('stats_items'); // Repeater
                                                         <div class="elementor-icon-box-icon">
                                                             <span class="elementor-icon">
                                                                 <?php 
-                                                                if ($icon_id) {
-                                                                    $file_path = get_attached_file($icon_id);
-                                                                    $ext = pathinfo($file_path, PATHINFO_EXTENSION);
-                                                                    if (strtolower($ext) === 'svg') {
-                                                                        echo file_get_contents($file_path);
-                                                                    } else {
-                                                                        echo wp_get_attachment_image($icon_id, 'full');
-                                                                    }
+                                                                if ($icon_svg && strpos($icon_svg, '<svg') !== false) {
+                                                                    echo $icon_svg;
                                                                 }
                                                                 ?>
                                                             </span>
