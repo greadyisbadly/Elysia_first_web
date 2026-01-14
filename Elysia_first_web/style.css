@@ -106,6 +106,55 @@ a:focus {
     text-decoration: underline;
 }
 
+a.button:hover,
+a.ct-button:hover,
+a.wp-block-button__link:hover,
+.elementor-button,
+.elementor-button-link,
+button:hover,
+input[type="submit"]:hover,
+.wp-element-button:hover,
+.btn:hover,
+.woocommerce button.button:hover,
+.woocommerce-message .showlogin:hover,
+.woocommerce-message .restore-item:hover,
+.forminator-ui[data-design="none"] .forminator-button:hover,
+.fluentform .ff-el-group button.ff-btn:hover,
+button.regform-button:hover,
+button[class*="ajax"]:hover,
+.added_to_cart:hover {
+    text-decoration: none !important;
+    -webkit-text-decoration: none !important;
+    --theme-text-decoration: none !important;
+    box-shadow: none !important;
+}
+
+a.button:hover,
+a.ct-button:hover,
+a.wp-block-button__link:hover,
+.elementor-button:hover,
+.elementor-button-link:hover,
+button:hover,
+input[type="submit"]:hover,
+.wp-element-button:hover,
+.btn:hover,
+.woocommerce button.button:hover,
+.woocommerce-message .showlogin:hover,
+.woocommerce-message .restore-item:hover,
+.forminator-ui[data-design="none"] .forminator-button:hover,
+.fluentform .ff-el-group button.ff-btn:hover,
+button.regform-button:hover,
+button[class*="ajax"]:hover,
+.added_to_cart:hover {
+    box-shadow: none !important;
+}
+
+[data-link="type-2"] .entry-content a {
+    --theme-text-decoration: none !important;
+    text-decoration: none !important;
+    -webkit-text-decoration: none !important;
+}
+
 img {
     border-style: none;
     height: auto;
