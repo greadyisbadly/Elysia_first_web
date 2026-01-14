@@ -442,11 +442,22 @@ body.rtl .elementor-188 .elementor-element.elementor-element-cc48102 {
 /* Start custom CSS for column, class: .elementor-element-252b6837 */
 /*Show/Hide CSS*/
 .elementor-188 .elementor-element.elementor-element-252b6837 .hide-first {
-    display: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    clip-path: inset(50% 50% 50% 50%);
+    transform: scale(0.6);
+    transform-origin: center center;
+    transition: max-height 0.8s ease, opacity 0.8s ease, transform 0.8s ease, clip-path 0.8s ease;
 }
 
 .elementor-188 .elementor-element.elementor-element-252b6837:hover .hide-first {
-    display: block;
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+    clip-path: inset(0 0 0 0);
+    transform: scale(1);
 }
 
 .elementor-188 .elementor-element.elementor-element-252b6837:hover .box1 {
@@ -457,11 +468,22 @@ body.rtl .elementor-188 .elementor-element.elementor-element-cc48102 {
 /* Start custom CSS for column, class: .elementor-element-5d1b642a */
 /*Show/Hide CSS*/
 .elementor-188 .elementor-element.elementor-element-5d1b642a .hide-first {
-    display: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    clip-path: inset(50% 50% 50% 50%);
+    transform: scale(0.6);
+    transform-origin: center center;
+    transition: max-height 0.8s ease, opacity 0.8s ease, transform 0.8s ease, clip-path 0.8s ease;
 }
 
 .elementor-188 .elementor-element.elementor-element-5d1b642a:hover .hide-first {
-    display: block;
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+    clip-path: inset(0 0 0 0);
+    transform: scale(1);
 }
 
 .elementor-188 .elementor-element.elementor-element-5d1b642a:hover .box1 {
@@ -472,11 +494,22 @@ body.rtl .elementor-188 .elementor-element.elementor-element-cc48102 {
 /* Start custom CSS for column, class: .elementor-element-4ffcf4d6 */
 /*Show/Hide CSS*/
 .elementor-188 .elementor-element.elementor-element-4ffcf4d6 .hide-first {
-    display: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    clip-path: inset(50% 50% 50% 50%);
+    transform: scale(0.6);
+    transform-origin: center center;
+    transition: max-height 0.8s ease, opacity 0.8s ease, transform 0.8s ease, clip-path 0.8s ease;
 }
 
 .elementor-188 .elementor-element.elementor-element-4ffcf4d6:hover .hide-first {
-    display: block;
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+    clip-path: inset(0 0 0 0);
+    transform: scale(1);
 }
 
 .elementor-188 .elementor-element.elementor-element-4ffcf4d6:hover .box1 {

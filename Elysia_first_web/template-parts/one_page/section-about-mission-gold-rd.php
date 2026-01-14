@@ -2,6 +2,8 @@
 $elysia_mission_background_settings = '';
 $elysia_mission_has_items = false;
 $elysia_mission_has_background = false;
+$elysia_mission_section_style = '';
+$elysia_mission_first_background_url = '';
 
 $elysia_mission_item_1_index = '';
 $elysia_mission_item_1_title = '';
@@ -18,8 +20,41 @@ $elysia_mission_item_3_title = '';
 $elysia_mission_item_3_description = '';
 $elysia_mission_item_3_animation = '';
 
+$elysia_mission_fallback_items = array(
+    array(
+        'index' => '01',
+        'title' => 'Our mission',
+        'description' => '<p>Our company has been adhering to the &ldquo;integrity-based, talent for the root of products for life, service for the soul, win-win for the way&rdquo; management philosophy and &ldquo;dedicated, persistent, excellence, continuous improvement&rdquo; of the spirit of enterprise to serve the industry customers, in order to &ldquo;buy things become a sensory journey&rdquo; for the corporate mission.</p>',
+        'animation' => 'zoomIn',
+    ),
+    array(
+        'index' => '02',
+        'title' => 'Our Gold',
+        'description' => '<p>Sunway has always been committed to providing professional cold-forming machinery, equipment training, global installation, improve after-sales as one of the solutions, &ldquo;to provide cold forming machinery with system solutions to varies industry&rdquo; is the goal of Sunway constantly strive for.</p>',
+        'animation' => 'zoomIn',
+    ),
+    array(
+        'index' => '03',
+        'title' => 'R &amp; D',
+        'description' => '<p>Sunway has strong research and development and production capacity, mature production technology, strict quality control and advanced operation mode, so that we have been in the lead in the industry, won the reputation of customers.</p>',
+        'animation' => 'zoomIn',
+    ),
+);
+
+$elysia_mission_fallback_bg_url = function_exists('get_template_directory_uri')
+    ? (get_template_directory_uri() . '/static/image/low-angle-view-modern-ceiling.jpg')
+    : '';
+
 if (function_exists('get_field')) {
     $items = get_field('about_mission_items');
+
+    if (!is_array($items) || empty($items)) {
+        $items = get_field('mission_items', 'option');
+    }
+
+    if (!is_array($items) || empty($items)) {
+        $items = $elysia_mission_fallback_items;
+    }
 
     if (is_array($items) && !empty($items)) {
         $elysia_mission_has_items = true;
@@ -73,7 +108,63 @@ if (function_exists('get_field')) {
         }
     }
 
+    if ($elysia_mission_item_1_index === '' && isset($elysia_mission_fallback_items[0]['index'])) {
+        $elysia_mission_item_1_index = $elysia_mission_fallback_items[0]['index'];
+    }
+    if ($elysia_mission_item_1_title === '' && isset($elysia_mission_fallback_items[0]['title'])) {
+        $elysia_mission_item_1_title = $elysia_mission_fallback_items[0]['title'];
+    }
+    if ($elysia_mission_item_1_description === '' && isset($elysia_mission_fallback_items[0]['description'])) {
+        $elysia_mission_item_1_description = $elysia_mission_fallback_items[0]['description'];
+    }
+    if ($elysia_mission_item_1_animation === '' && isset($elysia_mission_fallback_items[0]['animation'])) {
+        $elysia_mission_item_1_animation = $elysia_mission_fallback_items[0]['animation'];
+    }
+
+    if ($elysia_mission_item_2_index === '' && isset($elysia_mission_fallback_items[1]['index'])) {
+        $elysia_mission_item_2_index = $elysia_mission_fallback_items[1]['index'];
+    }
+    if ($elysia_mission_item_2_title === '' && isset($elysia_mission_fallback_items[1]['title'])) {
+        $elysia_mission_item_2_title = $elysia_mission_fallback_items[1]['title'];
+    }
+    if ($elysia_mission_item_2_description === '' && isset($elysia_mission_fallback_items[1]['description'])) {
+        $elysia_mission_item_2_description = $elysia_mission_fallback_items[1]['description'];
+    }
+    if ($elysia_mission_item_2_animation === '' && isset($elysia_mission_fallback_items[1]['animation'])) {
+        $elysia_mission_item_2_animation = $elysia_mission_fallback_items[1]['animation'];
+    }
+
+    if ($elysia_mission_item_3_index === '' && isset($elysia_mission_fallback_items[2]['index'])) {
+        $elysia_mission_item_3_index = $elysia_mission_fallback_items[2]['index'];
+    }
+    if ($elysia_mission_item_3_title === '' && isset($elysia_mission_fallback_items[2]['title'])) {
+        $elysia_mission_item_3_title = $elysia_mission_fallback_items[2]['title'];
+    }
+    if ($elysia_mission_item_3_description === '' && isset($elysia_mission_fallback_items[2]['description'])) {
+        $elysia_mission_item_3_description = $elysia_mission_fallback_items[2]['description'];
+    }
+    if ($elysia_mission_item_3_animation === '' && isset($elysia_mission_fallback_items[2]['animation'])) {
+        $elysia_mission_item_3_animation = $elysia_mission_fallback_items[2]['animation'];
+    }
+
     $slides = get_field('about_mission_background_slides');
+
+    if (!is_array($slides) || empty($slides)) {
+        $slides = get_field('mission_background_slides', 'option');
+    }
+
+    if (!is_array($slides) || empty($slides)) {
+        if ($elysia_mission_fallback_bg_url !== '') {
+            $slides = array(
+                array(
+                    'image' => array(
+                        'ID' => 0,
+                        'url' => $elysia_mission_fallback_bg_url,
+                    ),
+                ),
+            );
+        }
+    }
 
     if (is_array($slides) && !empty($slides)) {
         $gallery = array();
@@ -89,6 +180,10 @@ if (function_exists('get_field')) {
 
         if (!empty($gallery)) {
             $elysia_mission_has_background = true;
+            if (!empty($gallery[0]['url'])) {
+                $elysia_mission_first_background_url = (string) $gallery[0]['url'];
+                $elysia_mission_section_style = 'background-image:url(' . esc_url($elysia_mission_first_background_url) . ');background-size:cover;background-position:center center;background-repeat:no-repeat;';
+            }
             $background_array = array(
                 'background_background' => 'slideshow',
                 'background_slideshow_gallery' => $gallery,
@@ -110,7 +205,7 @@ if (!$elysia_mission_has_items && !$elysia_mission_has_background) {
     return;
 }
 ?>
-<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-165f95c0 ct-section-stretched elementor-section-height-min-height elementor-section-items-stretch elementor-section-content-bottom elementor-section-boxed elementor-section-height-default" data-id="165f95c0" data-element_type="section" data-settings="<?php echo esc_attr($elysia_mission_background_settings !== '' ? $elysia_mission_background_settings : '{}'); ?>">
+<section data-particle_enable="false" data-particle-mobile-disabled="false" class="elementor-section elementor-top-section elementor-element elementor-element-165f95c0 ct-section-stretched elementor-section-height-min-height elementor-section-items-stretch elementor-section-content-bottom elementor-section-boxed elementor-section-height-default" data-id="165f95c0" data-element_type="section" data-settings="<?php echo esc_attr($elysia_mission_background_settings !== '' ? $elysia_mission_background_settings : '{}'); ?>" <?php echo $elysia_mission_section_style !== '' ? ' style="' . esc_attr($elysia_mission_section_style) . '"' : ''; ?>>
     <div class="elementor-container elementor-column-gap-extended">
         <div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-252b6837" data-id="252b6837" data-element_type="column">
             <div class="elementor-widget-wrap elementor-element-populated">
@@ -128,7 +223,7 @@ if (!$elysia_mission_has_items && !$elysia_mission_has_background) {
                                         <h2 class="elementor-heading-title elementor-size-default"><?php echo esc_html($elysia_mission_item_1_title); ?></h2>
                                     </div>
                                 </div>
-                                <div class="elementor-element elementor-element-117abb6e elementor-widget elementor-widget-text-editor<?php echo $elysia_mission_item_1_animation === 'zoomIn' ? ' hide-first animated-fast elementor-invisible' : ''; ?>" data-id="117abb6e" data-element_type="widget" data-settings="<?php echo esc_attr($elysia_mission_item_1_animation === 'zoomIn' ? '{"_animation":"zoomIn"}' : '{}'); ?>" data-widget_type="text-editor.default">
+                                <div class="elementor-element elementor-element-117abb6e elementor-widget elementor-widget-text-editor hide-first<?php echo $elysia_mission_item_1_animation === 'zoomIn' ? ' animated-fast' : ''; ?>" data-id="117abb6e" data-element_type="widget" data-settings="<?php echo esc_attr($elysia_mission_item_1_animation === 'zoomIn' ? '{"_animation":"zoomIn"}' : '{}'); ?>" data-widget_type="text-editor.default">
                                     <div class="elementor-widget-container">
                                         <?php echo function_exists('wp_kses_post') ? wp_kses_post($elysia_mission_item_1_description) : esc_html($elysia_mission_item_1_description); ?>
                                     </div>
@@ -155,7 +250,7 @@ if (!$elysia_mission_has_items && !$elysia_mission_has_background) {
                                         <h2 class="elementor-heading-title elementor-size-default"><?php echo esc_html($elysia_mission_item_2_title); ?></h2>
                                     </div>
                                 </div>
-                                <div class="elementor-element elementor-element-49239f8 elementor-widget elementor-widget-text-editor<?php echo $elysia_mission_item_2_animation === 'zoomIn' ? ' hide-first animated-fast elementor-invisible' : ''; ?>" data-id="49239f8" data-element_type="widget" data-settings="<?php echo esc_attr($elysia_mission_item_2_animation === 'zoomIn' ? '{"_animation":"zoomIn"}' : '{}'); ?>" data-widget_type="text-editor.default">
+                                <div class="elementor-element elementor-element-49239f8 elementor-widget elementor-widget-text-editor hide-first<?php echo $elysia_mission_item_2_animation === 'zoomIn' ? ' animated-fast' : ''; ?>" data-id="49239f8" data-element_type="widget" data-settings="<?php echo esc_attr($elysia_mission_item_2_animation === 'zoomIn' ? '{"_animation":"zoomIn"}' : '{}'); ?>" data-widget_type="text-editor.default">
                                     <div class="elementor-widget-container">
                                         <?php echo function_exists('wp_kses_post') ? wp_kses_post($elysia_mission_item_2_description) : esc_html($elysia_mission_item_2_description); ?>
                                     </div>
@@ -182,7 +277,7 @@ if (!$elysia_mission_has_items && !$elysia_mission_has_background) {
                                         <h2 class="elementor-heading-title elementor-size-default"><?php echo esc_html($elysia_mission_item_3_title); ?></h2>
                                     </div>
                                 </div>
-                                <div class="elementor-element elementor-element-7e56b15b elementor-widget elementor-widget-text-editor<?php echo $elysia_mission_item_3_animation === 'zoomIn' ? ' hide-first animated-fast elementor-invisible' : ''; ?>" data-id="7e56b15b" data-element_type="widget" data-settings="<?php echo esc_attr($elysia_mission_item_3_animation === 'zoomIn' ? '{"_animation":"zoomIn"}' : '{}'); ?>" data-widget_type="text-editor.default">
+                                <div class="elementor-element elementor-element-7e56b15b elementor-widget elementor-widget-text-editor hide-first<?php echo $elysia_mission_item_3_animation === 'zoomIn' ? ' animated-fast' : ''; ?>" data-id="7e56b15b" data-element_type="widget" data-settings="<?php echo esc_attr($elysia_mission_item_3_animation === 'zoomIn' ? '{"_animation":"zoomIn"}' : '{}'); ?>" data-widget_type="text-editor.default">
                                     <div class="elementor-widget-container">
                                         <?php echo function_exists('wp_kses_post') ? wp_kses_post($elysia_mission_item_3_description) : esc_html($elysia_mission_item_3_description); ?>
                                     </div>

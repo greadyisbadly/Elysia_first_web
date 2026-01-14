@@ -62,7 +62,7 @@
                     <div class="elementor-widget-container">
                         <?php
                         $elysia_cta_label = 'CONTACT US';
-                        $elysia_cta_href = '#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjMwNiIsInRvZ2dsZSI6ZmFsc2V9';
+                        $elysia_cta_href = '#';
                         if (function_exists('get_field')) {
                             $elysia_label_field = get_field('elysia_product_archive_cta_label');
                             if (!$elysia_label_field) {
@@ -74,11 +74,11 @@
                         }
                         ?>
                         <div class="elementor-button-wrapper">
-                            <a class="elementor-button elementor-button-link elementor-size-md" href="<?php echo esc_url($elysia_cta_href); ?>">
+                            <button type="button" class="elementor-button elementor-button-link elementor-size-md" data-elysia-popup-open="306">
                                 <span class="elementor-button-content-wrapper">
                                     <span class="elementor-button-text"><?php echo esc_html($elysia_cta_label); ?></span>
                                 </span>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -134,14 +134,71 @@
                         $elysia_video_url = $elysia_video_field;
                     }
                 }
+
+                $elysia_video_embed_url = $elysia_video_url;
+                $elysia_video_is_youtube = false;
+                if ($elysia_video_url && function_exists('elysia_get_youtube_embed_url')) {
+                    $converted = elysia_get_youtube_embed_url($elysia_video_url);
+                    if ($converted && $converted !== $elysia_video_url) {
+                        $elysia_video_embed_url = $converted;
+                        $elysia_video_is_youtube = true;
+                    }
+                }
                 ?>
-                <div class="elementor-element elementor-element-5dafbf5 elementor-widget elementor-widget-video" data-id="5dafbf5" data-element_type="widget" data-settings="{&quot;youtube_url&quot;:&quot;<?php echo esc_url($elysia_video_url); ?>&quot;,&quot;show_image_overlay&quot;:&quot;yes&quot;,&quot;image_overlay&quot;:[],&quot;video_type&quot;:&quot;youtube&quot;,&quot;controls&quot;:&quot;yes&quot;}" data-widget_type="video.default">
+                <div class="elementor-element elementor-element-5dafbf5 elementor-widget elementor-widget-video" data-id="5dafbf5" data-element_type="widget" data-widget_type="video.default">
                     <div class="elementor-widget-container">
-                        <div class="elementor-wrapper elementor-open-inline">
-                            <div class="elementor-video"></div>
+                        <div class="elementor-wrapper elementor-open-inline" style="aspect-ratio: 16/9;">
+                            <div class="elementor-video">
+                                <div class="elysia-video-placeholder" data-elysia-video-src="<?php echo esc_attr($elysia_video_embed_url); ?>" data-elysia-video-is-youtube="<?php echo $elysia_video_is_youtube ? '1' : '0'; ?>"></div>
+                                <noscript>
+                                    <iframe src="<?php echo esc_url($elysia_video_embed_url); ?>" frameborder="0" allowfullscreen></iframe>
+                                </noscript>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <script>
+                    (function() {
+                        function initElysiaVideoPlaceholders(root) {
+                            var nodes = (root || document).querySelectorAll('.elysia-video-placeholder[data-elysia-video-src]');
+                            if (!nodes || nodes.length === 0) return;
+
+                            for (var i = 0; i < nodes.length; i++) {
+                                var node = nodes[i];
+                                if (node.getAttribute('data-elysia-video-initialized') === '1') continue;
+
+                                var src = node.getAttribute('data-elysia-video-src') || '';
+                                if (!src) continue;
+
+                                var isYoutube = node.getAttribute('data-elysia-video-is-youtube') === '1';
+
+                                var iframe = document.createElement('iframe');
+                                iframe.setAttribute('src', src);
+                                iframe.setAttribute('frameborder', '0');
+                                iframe.setAttribute('allowfullscreen', '');
+                                iframe.setAttribute('loading', 'lazy');
+
+                                if (isYoutube) {
+                                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                                } else {
+                                    iframe.setAttribute('allow', 'autoplay; encrypted-media');
+                                    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
+                                }
+
+                                node.appendChild(iframe);
+                                node.setAttribute('data-elysia-video-initialized', '1');
+                            }
+                        }
+
+                        if (document.readyState === 'loading') {
+                            document.addEventListener('DOMContentLoaded', function() {
+                                initElysiaVideoPlaceholders(document);
+                            });
+                        } else {
+                            initElysiaVideoPlaceholders(document);
+                        }
+                    })();
+                </script>
             </div>
         </div>
     </div>
