@@ -69,90 +69,136 @@
 		"clipboard_failed": "Failed to Copy",
 		"expand_submenu": "Expand dropdown menu",
 		"collapse_submenu": "Collapse dropdown menu",
-		"dynamic_js_chunks": [{
-			"id": "blocksy_pro_micro_popups",
-			"selector": ".ct-popup",
-			"url": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/framework/premium/static/bundle/micro-popups.js?ver=2.1.22')); ?>"
-		}, {
-			"id": "blocksy_sticky_header",
-			"selector": "header [data-sticky]",
-			"url": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/static/bundle/sticky.js?ver=2.1.22')); ?>"
-		}],
-		"dynamic_styles": {
-			"lazy_load": "<?php echo esc_url(home_url('/wp-content/themes/blocksy/static/bundle/non-critical-styles.min.css?ver=2.1.22')); ?>",
-			"search_lazy": "<?php echo esc_url(home_url('/wp-content/themes/blocksy/static/bundle/non-critical-search-styles.min.css?ver=2.1.22')); ?>",
-			"back_to_top": "<?php echo esc_url(home_url('/wp-content/themes/blocksy/static/bundle/back-to-top.min.css?ver=2.1.22')); ?>",
-			"cookie_notification": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/framework/extensions/cookies-consent/static/bundle/main.min.css')); ?>"
-		},
-		"dynamic_styles_selectors": [{
-			"selector": ".ct-header-cart, #woo-cart-panel",
-			"url": "<?php echo esc_url(home_url('/wp-content/themes/blocksy/static/bundle/cart-header-element-lazy.min.css?ver=2.1.22')); ?>"
-		}, {
-			"selector": ".flexy",
-			"url": "<?php echo esc_url(home_url('/wp-content/themes/blocksy/static/bundle/flexy.min.css?ver=2.1.22')); ?>"
-		}, {
-			"selector": ".ct-media-container[data-media-id], .ct-dynamic-media[data-media-id]",
-			"url": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/framework/premium/static/bundle/video-lazy.min.css?ver=2.1.22')); ?>"
-		}, {
-			"selector": "#account-modal",
-			"url": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/static/bundle/header-account-modal-lazy.min.css?ver=2.1.22')); ?>"
-		}, {
-			"selector": ".ct-header-account",
-			"url": "<?php echo esc_url(home_url('/wp-content/plugins/blocksy-companion-pro/static/bundle/header-account-dropdown-lazy.min.css?ver=2.1.22')); ?>"
-		}]
+		"dynamic_js_chunks": [],
+		"dynamic_styles": {},
+		"dynamic_styles_selectors": []
 	};
 </script>
-<script src="<?php echo get_template_directory_uri(); ?>/static/js/main.js" id="ct-scripts-js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
-		var desktopMenu = document.querySelector('#header-menu-1 .menu');
-		if (desktopMenu) {
-			var desktopItems = desktopMenu.querySelectorAll('li');
-			desktopItems.forEach(function(item) {
-				var sub = null;
+		function initMenu(root, mode) {
+			if (!root) {
+				return;
+			}
+			var items = root.querySelectorAll('li');
+			items.forEach(function(item) {
+				var submenu = null;
 				for (var i = 0; i < item.children.length; i++) {
 					if (item.children[i].tagName === 'UL') {
-						sub = item.children[i];
+						submenu = item.children[i];
 						break;
 					}
 				}
-				if (sub) {
-					item.classList.add('has-submenu');
+				if (!submenu) {
+					return;
+				}
+				item.classList.add('has-submenu');
+				if (mode !== 'mobile') {
+					return;
+				}
+				var toggleButton = item.querySelector('.ct-sub-menu-parent .ct-toggle-dropdown-mobile');
+				var clickTarget = toggleButton;
+				if (!clickTarget) {
+					clickTarget = item.querySelector('a');
+				}
+				if (!clickTarget) {
+					return;
+				}
+				clickTarget.addEventListener('click', function(event) {
+					if (clickTarget.tagName === 'A') {
+						event.preventDefault();
+					}
+					item.classList.toggle('is-open');
+					if (toggleButton) {
+						var expanded = toggleButton.getAttribute('aria-expanded') === 'true';
+						toggleButton.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+					}
+				});
+			});
+		}
+
+		var desktopMenu = document.querySelector('#header-menu-1 .menu');
+		initMenu(desktopMenu, 'desktop');
+
+		var panel = document.getElementById('offcanvas');
+		var mobileNav = panel ? panel.querySelector('[data-id="mobile-menu"].mobile-menu') : null;
+		initMenu(mobileNav, 'mobile');
+
+		var trigger = document.querySelector('.ct-header-trigger.ct-toggle[data-toggle-panel="#offcanvas"]');
+		var closeButton = panel ? panel.querySelector('.ct-toggle-close') : null;
+
+		function openPanel() {
+			document.body.setAttribute('data-panel', 'in');
+			if (panel) {
+				panel.classList.add('active');
+				panel.removeAttribute('inert');
+				panel.setAttribute('aria-hidden', 'false');
+			}
+		}
+
+		function closePanel() {
+			document.body.removeAttribute('data-panel');
+			if (panel) {
+				panel.classList.remove('active');
+				panel.setAttribute('inert', '');
+				panel.setAttribute('aria-hidden', 'true');
+			}
+		}
+
+		if (panel && trigger) {
+			trigger.addEventListener('click', function(event) {
+				event.preventDefault();
+				var isActive = panel.classList.contains('active');
+				if (isActive) {
+					closePanel();
+				} else {
+					openPanel();
 				}
 			});
 		}
 
-
-		var mobileNav = document.querySelector('[data-id="mobile-menu"].mobile-menu');
-		if (mobileNav) {
-			var mobileItems = mobileNav.querySelectorAll('li');
-			mobileItems.forEach(function(item) {
-				var sub = null;
-				for (var j = 0; j < item.children.length; j++) {
-					if (item.children[j].tagName === 'UL') {
-						sub = item.children[j];
-						break;
-					}
-				}
-				if (!sub) {
-					return;
-				}
-				item.classList.add('has-submenu');
-				var link = null;
-				for (var k = 0; k < item.children.length; k++) {
-					if (item.children[k].tagName === 'A') {
-						link = item.children[k];
-						break;
-					}
-				}
-				if (!link) {
-					return;
-				}
-				link.addEventListener('click', function(event) {
-					event.preventDefault();
-					item.classList.toggle('is-open');
-				});
+		if (panel && closeButton) {
+			closeButton.addEventListener('click', function(event) {
+				event.preventDefault();
+				closePanel();
 			});
+		}
+
+		if (panel && 'ontouchstart' in window) {
+			var startX = 0;
+			var startY = 0;
+			panel.addEventListener('touchstart', function(event) {
+				if (!event.touches || event.touches.length === 0) {
+					return;
+				}
+				startX = event.touches[0].clientX;
+				startY = event.touches[0].clientY;
+			});
+			panel.addEventListener('touchend', function(event) {
+				if (!event.changedTouches || event.changedTouches.length === 0) {
+					return;
+				}
+				var endX = event.changedTouches[0].clientX;
+				var endY = event.changedTouches[0].clientY;
+				var deltaX = endX - startX;
+				var deltaY = endY - startY;
+				if (Math.abs(deltaX) < 60) {
+					return;
+				}
+				if (Math.abs(deltaX) <= Math.abs(deltaY)) {
+					return;
+				}
+				closePanel();
+			});
+		}
+	});
+
+	window.addEventListener('unhandledrejection', function(event) {
+		if (!event || !event.reason) {
+			return;
+		}
+		if (event.reason.name === 'ChunkLoadError') {
+			event.preventDefault();
 		}
 	});
 </script>
@@ -291,7 +337,6 @@
 		}
 	};
 </script>
-<script src="<?php echo get_template_directory_uri(); ?>/static/js/frontend.min.js" id="elementor-frontend-js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/static/js/jquery.sticky.min.js" id="e-sticky-js"></script>
 <script async src="<?php echo get_template_directory_uri(); ?>/static/js/main-1.js" id="blocksy-ext-cookies-consent-scripts-js"></script>
 <script id="eael-general-js-extra">

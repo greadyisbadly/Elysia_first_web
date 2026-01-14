@@ -285,6 +285,82 @@ function elysia_first_web_add_ct_menu_link_class($atts, $item, $args)
     return $atts;
 }
 
+class Elysia_First_Web_Mobile_Walker extends Walker_Nav_Menu
+{
+    public function start_lvl(&$output, $depth = 0, $args = array())
+    {
+        $indent = str_repeat("\t", $depth);
+        $output .= "\n$indent<ul class=\"sub-menu\">\n";
+    }
+
+    public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
+    {
+        $indent = $depth ? str_repeat("\t", $depth) : '';
+        $classes = empty($item->classes) ? array() : (array) $item->classes;
+        $classes[] = 'menu-item';
+        $class_names = implode(' ', array_filter(array_unique($classes)));
+        $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
+        $output .= $indent . '<li' . $class_names . '>';
+        $atts = array();
+        if (!empty($item->attr_title)) {
+            $atts['title'] = $item->attr_title;
+        }
+        if (!empty($item->target)) {
+            $atts['target'] = $item->target;
+        }
+        if (!empty($item->xfn)) {
+            $atts['rel'] = $item->xfn;
+        }
+        if (!empty($item->url)) {
+            $atts['href'] = $item->url;
+        }
+        $atts = apply_filters('nav_menu_link_attributes', $atts, $item, $args);
+        $attributes = '';
+        foreach ($atts as $attr => $value) {
+            if (!empty($value)) {
+                if ($attr === 'href') {
+                    $value = esc_url($value);
+                } else {
+                    $value = esc_attr($value);
+                }
+                $attributes .= ' ' . $attr . '="' . $value . '"';
+            }
+        }
+        $title = apply_filters('the_title', $item->title, $item->ID);
+        $title = apply_filters('nav_menu_item_title', $title, $item, $args, $depth);
+        if (!empty($args->has_children)) {
+            $output .= '<span class="ct-sub-menu-parent">';
+            $output .= '<a' . $attributes . '>' . $title . '</a>';
+            $output .= '<button class="ct-toggle-dropdown-mobile" aria-label="' . esc_attr__('Expand dropdown menu', 'elysia_first_web') . '" aria-haspopup="true" aria-expanded="false">';
+            $output .= '<svg class="ct-icon toggle-icon-1" width="15" height="15" viewBox="0 0 15 15" aria-hidden="true">';
+            $output .= '<path d="M3.9,5.1l3.6,3.6l3.6-3.6l1.4,0.7l-5,5l-5-5L3.9,5.1z" />';
+            $output .= '</svg>';
+            $output .= '</button>';
+            $output .= '</span>';
+        } else {
+            $output .= '<a' . $attributes . '>' . $title . '</a>';
+        }
+    }
+
+    public function end_el(&$output, $item, $depth = 0, $args = array())
+    {
+        $output .= "</li>\n";
+    }
+
+    public function display_element($element, &$children_elements, $max_depth, $depth = 0, $args = array(), &$output = '')
+    {
+        if (!$element) {
+            return;
+        }
+        $id_field = $this->db_fields['id'];
+        $element_id = $element->$id_field;
+        if (isset($args[0]) && is_object($args[0])) {
+            $args[0]->has_children = !empty($children_elements[$element_id]);
+        }
+        parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
+    }
+}
+
 add_action('after_setup_theme', 'elysia_first_web_setup');
 
 function elysia_first_web_register_product_post_type()

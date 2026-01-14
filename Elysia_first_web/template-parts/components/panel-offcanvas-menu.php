@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="ct-panel-content" data-device="mobile">
-			<div class="ct-panel-content-inner">
+			<div class="ct-panel-content-inner ">
 				<nav class="mobile-menu menu-container has-submenu" data-id="mobile-menu" data-interaction="click" data-toggle-type="type-1" data-submenu-dots="yes" aria-label="<?php esc_attr_e('Main Menu', 'elysia_first_web'); ?>">
 					<?php
 					wp_nav_menu(
@@ -24,6 +24,7 @@
 							'menu_id'        => 'menu-main-menu-1',
 							'menu_class'     => '',
 							'fallback_cb'    => false,
+							'walker'         => new Elysia_First_Web_Mobile_Walker(),
 						)
 					);
 					?>
