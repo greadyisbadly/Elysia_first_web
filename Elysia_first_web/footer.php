@@ -103,6 +103,59 @@
 	};
 </script>
 <script src="<?php echo get_template_directory_uri(); ?>/static/js/main.js" id="ct-scripts-js"></script>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var desktopMenu = document.querySelector('#header-menu-1 .menu');
+		if (desktopMenu) {
+			var desktopItems = desktopMenu.querySelectorAll('li');
+			desktopItems.forEach(function(item) {
+				var sub = null;
+				for (var i = 0; i < item.children.length; i++) {
+					if (item.children[i].tagName === 'UL') {
+						sub = item.children[i];
+						break;
+					}
+				}
+				if (sub) {
+					item.classList.add('has-submenu');
+				}
+			});
+		}
+
+
+		var mobileNav = document.querySelector('[data-id="mobile-menu"].mobile-menu');
+		if (mobileNav) {
+			var mobileItems = mobileNav.querySelectorAll('li');
+			mobileItems.forEach(function(item) {
+				var sub = null;
+				for (var j = 0; j < item.children.length; j++) {
+					if (item.children[j].tagName === 'UL') {
+						sub = item.children[j];
+						break;
+					}
+				}
+				if (!sub) {
+					return;
+				}
+				item.classList.add('has-submenu');
+				var link = null;
+				for (var k = 0; k < item.children.length; k++) {
+					if (item.children[k].tagName === 'A') {
+						link = item.children[k];
+						break;
+					}
+				}
+				if (!link) {
+					return;
+				}
+				link.addEventListener('click', function(event) {
+					event.preventDefault();
+					item.classList.toggle('is-open');
+				});
+			});
+		}
+	});
+</script>
 <script src="<?php echo get_template_directory_uri(); ?>/static/js/webpack.runtime.min.js" id="elementor-webpack-runtime-js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/static/js/frontend-modules.min.js" id="elementor-frontend-modules-js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/static/js/core.min.js" id="jquery-ui-core-js"></script>
