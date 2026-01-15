@@ -120,27 +120,34 @@ $GLOBALS['elysia_solution_query'] = $elysia_solution_query;
                     }
                 }
                 if ($elysia_sidebar_embed_url) :
-                    $elysia_sidebar_settings = array(
-                        'controls' => 'yes',
-                    );
-                    if ($elysia_sidebar_is_youtube) {
-                        $elysia_sidebar_settings['youtube_url'] = $elysia_sidebar_video_url;
-                        $elysia_sidebar_settings['video_type'] = 'youtube';
-                    } else {
-                        $elysia_sidebar_settings['video_type'] = 'hosted';
+                    $elysia_cover_image_url = get_template_directory_uri() . '/static/image/f15e9f56-e802-41c0-a541-33339e5a6f9a-1.jpg';
+                    if (function_exists('get_field')) {
+                        $elysia_cover_image_id = get_field('solution_list_sidebar_video_cover_image', $elysia_context_id);
+                        if (!$elysia_cover_image_id) {
+                            $elysia_cover_image_id = get_field('solution_default_sidebar_video_cover_image', 'option');
+                        }
+                        if ($elysia_cover_image_id) {
+                            if (is_array($elysia_cover_image_id)) {
+                                $elysia_cover_image_url = isset($elysia_cover_image_id['url']) ? $elysia_cover_image_id['url'] : wp_get_attachment_image_url($elysia_cover_image_id, 'full');
+                            } else {
+                                $elysia_cover_image_url = wp_get_attachment_image_url($elysia_cover_image_id, 'full');
+                            }
+                        }
                     }
-                ?>
-                    <div class="elementor-element elementor-element-27f192e elementor-widget elementor-widget-video" data-id="27f192e" data-element_type="widget" data-settings="<?php echo esc_attr(wp_json_encode($elysia_sidebar_settings)); ?>" data-widget_type="video.default">
+                    ?>
+                    <div class="elementor-element elementor-element-27f192e elementor-widget elementor-widget-image" data-id="27f192e" data-element_type="widget" data-widget_type="image.default">
                         <div class="elementor-widget-container">
-                            <div class="elementor-wrapper elementor-open-inline" style="aspect-ratio: <?php echo esc_attr($elysia_sidebar_video_aspect_ratio); ?>;">
-                                <div class="elementor-video">
-                                    <?php if ($elysia_sidebar_is_youtube) : ?>
-                                        <iframe src="<?php echo esc_url($elysia_sidebar_embed_url); ?>" frameborder="0" allowfullscreen></iframe>
-                                    <?php else : ?>
-                                        <iframe src="<?php echo esc_url($elysia_sidebar_embed_url); ?>" frameborder="0" allow="autoplay; encrypted-media" sandbox="allow-scripts allow-same-origin allow-popups" allowfullscreen></iframe>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
+                            <a class="elysia-video-trigger" href="#" data-video-url="<?php echo esc_attr($elysia_sidebar_embed_url); ?>" data-video-is-html5="0">
+                                <img src="<?php echo esc_url($elysia_cover_image_url); ?>" 
+                                     alt="<?php echo esc_attr__('Solution Video', 'elysia_first_web'); ?>"
+                                     class="elysia-video-cover" 
+                                     loading="lazy" />
+                                <span class="elysia-video-play-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </span>
+                            </a>
                         </div>
                     </div>
                 <?php endif; ?>

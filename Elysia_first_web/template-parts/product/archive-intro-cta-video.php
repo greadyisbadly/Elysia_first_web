@@ -145,60 +145,33 @@
                     }
                 }
                 ?>
-                <div class="elementor-element elementor-element-5dafbf5 elementor-widget elementor-widget-video" data-id="5dafbf5" data-element_type="widget" data-widget_type="video.default">
+                <div class="elementor-element elementor-element-5dafbf5 elementor-widget elementor-widget-image" data-id="5dafbf5" data-element_type="widget" data-widget_type="image.default">
                     <div class="elementor-widget-container">
-                        <div class="elementor-wrapper elementor-open-inline" style="aspect-ratio: 16/9;">
-                            <div class="elementor-video">
-                                <div class="elysia-video-placeholder" data-elysia-video-src="<?php echo esc_attr($elysia_video_embed_url); ?>" data-elysia-video-is-youtube="<?php echo $elysia_video_is_youtube ? '1' : '0'; ?>"></div>
-                                <noscript>
-                                    <iframe src="<?php echo esc_url($elysia_video_embed_url); ?>" frameborder="0" allowfullscreen></iframe>
-                                </noscript>
-                            </div>
-                        </div>
+                        <a class="elysia-video-trigger" href="#" data-video-url="<?php echo esc_attr($elysia_video_embed_url); ?>" data-video-is-html5="0">
+                            <?php
+                            $elysia_cover_image_url = get_template_directory_uri() . '/static/image/f15e9f56-e802-41c0-a541-33339e5a6f9a-1.jpg';
+                            if (function_exists('get_field')) {
+                                $elysia_cover_image_id = get_field('elysia_product_archive_video_cover_image');
+                                if (!$elysia_cover_image_id) {
+                                    $elysia_cover_image_id = get_field('elysia_product_archive_video_cover_image', 'option');
+                                }
+                                if ($elysia_cover_image_id) {
+                                    $elysia_cover_image_url = wp_get_attachment_image_url($elysia_cover_image_id, 'full');
+                                }
+                            }
+                            ?>
+                            <img src="<?php echo esc_url($elysia_cover_image_url); ?>" 
+                                 alt="<?php echo esc_attr__('Product Video', 'elysia_first_web'); ?>"
+                                 class="elysia-video-cover" 
+                                 loading="lazy" />
+                            <span class="elysia-video-play-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </span>
+                        </a>
                     </div>
                 </div>
-                <script>
-                    (function() {
-                        function initElysiaVideoPlaceholders(root) {
-                            var nodes = (root || document).querySelectorAll('.elysia-video-placeholder[data-elysia-video-src]');
-                            if (!nodes || nodes.length === 0) return;
-
-                            for (var i = 0; i < nodes.length; i++) {
-                                var node = nodes[i];
-                                if (node.getAttribute('data-elysia-video-initialized') === '1') continue;
-
-                                var src = node.getAttribute('data-elysia-video-src') || '';
-                                if (!src) continue;
-
-                                var isYoutube = node.getAttribute('data-elysia-video-is-youtube') === '1';
-
-                                var iframe = document.createElement('iframe');
-                                iframe.setAttribute('src', src);
-                                iframe.setAttribute('frameborder', '0');
-                                iframe.setAttribute('allowfullscreen', '');
-                                iframe.setAttribute('loading', 'lazy');
-
-                                if (isYoutube) {
-                                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-                                } else {
-                                    iframe.setAttribute('allow', 'autoplay; encrypted-media');
-                                    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
-                                }
-
-                                node.appendChild(iframe);
-                                node.setAttribute('data-elysia-video-initialized', '1');
-                            }
-                        }
-
-                        if (document.readyState === 'loading') {
-                            document.addEventListener('DOMContentLoaded', function() {
-                                initElysiaVideoPlaceholders(document);
-                            });
-                        } else {
-                            initElysiaVideoPlaceholders(document);
-                        }
-                    })();
-                </script>
             </div>
         </div>
     </div>

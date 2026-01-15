@@ -37,6 +37,42 @@ function elysia_first_web_site_logo()
     </a>
     <?php
 }
+
+// 自定义菜单Walker - 为有二级菜单的项添加箭头图标
+class Elysia_Menu_Walker extends Walker_Nav_Menu {
+    public function start_lvl(&$output, $depth = 0, $args = null) {
+        $output .= '<ul class="sub-menu">';
+    }
+    
+    public function end_lvl(&$output, $depth = 0, $args = null) {
+        $output .= '</ul>';
+    }
+    
+    public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+        $has_children = in_array('menu-item-has-children', $item->classes);
+        
+        $indent = ($depth) ? str_repeat("\t", $depth) : '';
+        
+        $output .= $indent . '<li id="menu-item-' . $item->ID . '" class="menu-item menu-item-' . $item->ID . ' ' . implode(' ', $item->classes) . '">';
+        
+        $output .= '<a class="ct-menu-link" href="' . esc_url($item->url) . '">';
+        $output .= '<span class="ct-menu-link-text">' . $item->title . '</span>';
+        
+        if ($has_children) {
+            if ($depth === 0) {
+                $output .= '<span class="ct-toggle-dropdown-desktop"><svg class="ct-icon" width="8" height="8" viewBox="0 0 15 15" aria-hidden="true"><path d="M3.9,5.1l3.6,3.6l3.6-3.6l1.4,0.7l-5,5l-5-5L3.9,5.1z"></path></svg></span>';
+            } else {
+                $output .= '<span class="ct-toggle-dropdown-desktop submenu-arrow-right"><svg class="ct-icon" width="8" height="8" viewBox="0 0 15 15" aria-hidden="true"><path d="M3.9,5.1l3.6,3.6l3.6-3.6l1.4,0.7l-5,5l-5-5L3.9,5.1z"></path></svg></span>';
+            }
+        }
+        
+        $output .= '</a>';
+    }
+    
+    public function end_el(&$output, $item, $depth = 0, $args = null) {
+        $output .= '</li>';
+    }
+}
 // 注册主题需要的导航菜单位置
 function elysia_first_web_setup()
 {
@@ -4359,3 +4395,476 @@ function elysia_first_web_mime_types($mimes)
     return $mimes;
 }
 add_filter('upload_mimes', 'elysia_first_web_mime_types');
+
+// 统一弹窗视频播放器样式和JS逻辑
+function elysia_first_web_enqueue_video_popup_assets()
+{
+    ?>
+    <style>
+        .elysia-video-popup-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(4px);
+        }
+
+        .elysia-video-popup-modal.is-open {
+            display: flex;
+        }
+
+        .elysia-video-popup-dialog {
+            position: relative;
+            max-width: 960px;
+            width: 90%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .elysia-video-popup-iframe-wrapper {
+            position: relative;
+            padding-top: 56.25%;
+            background-color: #000;
+        }
+
+        .elysia-video-popup-iframe-wrapper iframe,
+        .elysia-video-popup-iframe-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .elysia-video-popup-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            z-index: 2;
+            background: transparent;
+            border: 0;
+            color: #fff;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .elysia-video-popup-close:hover {
+            opacity: 1;
+        }
+
+        body.elysia-video-popup-open {
+            overflow: hidden;
+        }
+
+        .elysia-video-trigger {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+        }
+
+        .elysia-video-trigger .elysia-video-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .elysia-video-trigger:hover .elysia-video-play-icon {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .elysia-video-trigger .elysia-video-play-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: #fff;
+            margin-left: 4px;
+        }
+
+        .elysia-video-cover {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    </style>
+
+    <div id="elysia-video-popup-modal" class="elysia-video-popup-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="elysia-video-popup-dialog">
+            <button type="button" class="elysia-video-popup-close" aria-label="关闭视频">×</button>
+            <div class="elysia-video-popup-iframe-wrapper"></div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var popupModal = document.getElementById('elysia-video-popup-modal');
+        var iframeWrapper = popupModal ? popupModal.querySelector('.elysia-video-popup-iframe-wrapper') : null;
+        var closeButton = popupModal ? popupModal.querySelector('.elysia-video-popup-close') : null;
+        var triggerSelectors = '.elysia-video-trigger';
+
+        function openVideoPopup(url, isHtml5Video) {
+            if (!popupModal || !iframeWrapper) return;
+
+            var child = null;
+            if (isHtml5Video) {
+                var video = document.createElement('video');
+                video.src = url;
+                video.controls = true;
+                video.autoplay = true;
+                video.playsInline = true;
+                child = video;
+            } else {
+                var iframe = document.createElement('iframe');
+                var finalUrl = url;
+                if (finalUrl.indexOf('youtube.com/embed') !== -1 || finalUrl.indexOf('player.vimeo.com/video') !== -1) {
+                    finalUrl += finalUrl.indexOf('?') === -1 ? '?autoplay=1' : '&autoplay=1';
+                }
+                iframe.src = finalUrl;
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+                iframe.setAttribute('allowfullscreen', 'allowfullscreen');
+                child = iframe;
+            }
+
+            iframeWrapper.innerHTML = '';
+            iframeWrapper.appendChild(child);
+            popupModal.classList.add('is-open');
+            document.body.classList.add('elysia-video-popup-open');
+            popupModal.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeVideoPopup() {
+            if (!popupModal || !iframeWrapper) return;
+            popupModal.classList.remove('is-open');
+            document.body.classList.remove('elysia-video-popup-open');
+            iframeWrapper.innerHTML = '';
+            popupModal.setAttribute('aria-hidden', 'true');
+        }
+
+        function initVideoTriggers() {
+            var triggers = document.querySelectorAll(triggerSelectors);
+            for (var i = 0; i < triggers.length; i++) {
+                (function(trigger) {
+                    if (trigger.getAttribute('data-initialized') === '1') return;
+
+                    trigger.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        var url = trigger.getAttribute('data-video-url');
+                        var isHtml5 = trigger.getAttribute('data-video-is-html5') === '1';
+                        if (url) {
+                            openVideoPopup(url, isHtml5);
+                        }
+                    });
+
+                    trigger.setAttribute('data-initialized', '1');
+                })(triggers[i]);
+            }
+        }
+
+        function closeOnEscape(event) {
+            if (event.key === 'Escape' && popupModal && popupModal.classList.contains('is-open')) {
+                closeVideoPopup();
+            }
+        }
+
+        function closeOnBackgroundClick(event) {
+            if (event.target === popupModal) {
+                closeVideoPopup();
+            }
+        }
+
+        if (popupModal) {
+            if (closeButton) {
+                closeButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    closeVideoPopup();
+                });
+            }
+
+            popupModal.addEventListener('click', closeOnBackgroundClick);
+        }
+
+        document.addEventListener('keydown', closeOnEscape);
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                initVideoTriggers();
+            });
+        } else {
+            initVideoTriggers();
+        }
+    })();
+    </script>
+    <?php
+}
+
+// 添加菜单样式CSS（匹配swforming主题）
+function elysia_first_web_menu_styles()
+{
+    ?>
+    <style type="text/css">
+        /* ==========================================================================
+           Header & Menu Styling (Matching swforming theme)
+           ========================================================================== */
+
+        /* Logo Styles */
+        [data-header*="type-1"] .ct-header [data-id="logo"] .site-logo-container {
+            --logo-max-height: 56px;
+        }
+
+        [data-header*="type-1"] .ct-header [data-id="logo"] .site-title {
+            --theme-font-weight: 700;
+            --theme-font-size: 25px;
+            --theme-line-height: 1.5;
+            --theme-link-initial-color: var(--theme-palette-color-4);
+        }
+
+        /* Main Menu Styles */
+        [data-header*="type-1"] .ct-header [data-id="menu"]>ul>li>a {
+            --theme-font-weight: 700;
+            --theme-text-transform: uppercase;
+            --theme-font-size: 14px;
+            --theme-line-height: 1.3;
+            --theme-link-initial-color: var(--theme-text-color);
+        }
+
+        /* Dropdown Menu Styles */
+        [data-header*="type-1"] .ct-header [data-id="menu"] .sub-menu .ct-menu-link {
+            --theme-link-initial-color: #ffffff;
+            --theme-link-hover-color: var(--theme-palette-color-1);
+            --theme-font-weight: 500;
+            --theme-font-size: 15px;
+        }
+
+        [data-header*="type-1"] .ct-header [data-id="menu"] .sub-menu {
+            --dropdown-width: 300px;
+            --dropdown-divider: 1px dashed rgba(255, 255, 255, 0.1);
+            --theme-box-shadow: 0px 10px 20px rgba(41, 51, 61, 0.1);
+            --theme-border-radius: 0px 0px 2px 2px;
+        }
+
+        [data-header*="type-1"] .ct-header [data-id="menu"] .menu>li {
+            position: relative;
+        }
+
+        [data-header*="type-1"] .ct-header [data-id="menu"] .menu>li>.sub-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: var(--dropdown-width);
+            z-index: 9999;
+        }
+
+        [data-header*="type-1"] .ct-header [data-id="menu"] .menu>li>.sub-menu>li {
+            position: relative;
+        }
+
+        [data-header*="type-1"] .ct-header [data-id="menu"] .menu>li>.sub-menu>li>.sub-menu,
+        [data-header*="type-1"] .ct-header [data-id="menu"] .sub-menu .sub-menu {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            min-width: var(--dropdown-width);
+            z-index: 9999;
+        }
+
+        [data-header*="type-1"] .ct-header nav[data-id="menu"][data-responsive="no"] {
+            overflow: visible;
+        }
+
+        [data-header*="type-1"] .ct-header [data-id="menu"] [class*="animated-submenu"]>.sub-menu {
+            overflow: visible !important;
+            max-height: none !important;
+        }
+
+        /* Transparent Row Menu Styles */
+        [data-header*="type-1"] .ct-header [data-transparent-row="yes"] [data-id="menu"]>ul>li>a {
+            --theme-link-initial-color: var(--theme-palette-color-8);
+            --theme-link-hover-color: var(--theme-palette-color-1);
+        }
+
+        [data-header*="type-1"] .ct-header [data-transparent-row="yes"] [data-id="menu"] {
+            --menu-indicator-active-color: var(--theme-palette-color-1);
+        }
+
+        /* Sticky Row Menu Styles */
+        [data-header*="type-1"] .ct-header [data-sticky*="yes"] [data-id="menu"]>ul>li>a {
+            --theme-link-hover-color: var(--theme-palette-color-1);
+        }
+
+        [data-header*="type-1"] .ct-header [data-sticky*="yes"] [data-id="menu"] {
+            --menu-indicator-active-color: var(--theme-palette-color-1);
+        }
+
+        [data-header*="type-1"] .ct-header [data-sticky*="yes"] [data-id="menu"] .sub-menu {
+            --sticky-state-dropdown-top-offset: 0px;
+        }
+
+        /* Menu Item Visibility States */
+        [data-header*="type-1"] .ct-header [data-id="menu"] .menu li.menu-item-has-children>.sub-menu,
+        [data-header*="type-1"] .ct-header [data-id="menu"] .menu li.has-submenu>.sub-menu {
+            display: none;
+        }
+
+        [data-header*="type-1"] .ct-header [data-id="menu"] .menu li.menu-item-has-children.is-open>.sub-menu,
+        [data-header*="type-1"] .ct-header [data-id="menu"] .menu li.has-submenu.is-open>.sub-menu,
+        [data-header*="type-1"] .ct-header [data-id="menu"] .menu li.menu-item-has-children:hover>.sub-menu,
+        [data-header*="type-1"] .ct-header [data-id="menu"] .menu li.has-submenu:hover>.sub-menu {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            transform: none !important;
+        }
+
+        /* Mobile Menu Styles */
+        [data-header*="type-1"] [data-id="mobile-menu"].mobile-menu li.menu-item-has-children>.sub-menu,
+        [data-header*="type-1"] [data-id="mobile-menu"].mobile-menu li.has-submenu>.sub-menu {
+            display: none;
+        }
+
+        [data-header*="type-1"] [data-id="mobile-menu"].mobile-menu li.menu-item-has-children.is-open>.sub-menu,
+        [data-header*="type-1"] [data-id="mobile-menu"].mobile-menu li.has-submenu.is-open>.sub-menu {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            transform: none !important;
+        }
+
+        [data-header*="type-1"] [data-id="mobile-menu"] {
+            --theme-font-weight: 700;
+            --theme-font-size: 20px;
+            --theme-link-initial-color: #ffffff;
+            --theme-link-hover-color: var(--theme-palette-color-1);
+            --mobile-menu-divider: none;
+        }
+
+        [data-header*="type-1"] #offcanvas [data-id="mobile-menu"].mobile-menu a.ct-menu-link,
+        [data-header*="type-1"] #offcanvas [data-id="mobile-menu"].mobile-menu a.ct-menu-link:hover,
+        [data-header*="type-1"] #offcanvas [data-id="mobile-menu"].mobile-menu a.ct-menu-link:focus,
+        [data-header*="type-1"] #offcanvas [data-id="mobile-menu"].mobile-menu a.ct-menu-link:active {
+            text-decoration: none;
+        }
+
+        /* Header Middle Row Styles */
+        [data-header*="type-1"] .ct-header [data-row*="middle"] {
+            --height: 20px;
+            background-color: var(--theme-palette-color-8);
+            background-image: none;
+            --theme-border-top: none;
+            --theme-border-bottom: none;
+            --theme-box-shadow: 0px 10px 20px rgba(44, 62, 80, 0.05);
+        }
+
+        [data-header*="type-1"] .ct-header [data-row*="middle"]>div {
+            --theme-border-top: none;
+            --theme-border-bottom: none;
+        }
+
+        [data-header*="type-1"] .ct-header [data-transparent-row="yes"][data-row*="middle"] {
+            background-color: rgba(219, 219, 219, 0.6);
+            background-image: none;
+            --theme-border-top: none;
+            --theme-border-bottom: none;
+            --theme-box-shadow: none;
+        }
+
+        [data-header*="type-1"] .ct-header [data-transparent-row="yes"][data-row*="middle"]>div {
+            --theme-border-top: none;
+            --theme-border-bottom: none;
+        }
+
+        [data-header*="type-1"] .ct-header [data-sticky*="yes"] [data-row*="middle"] {
+            background-color: var(--theme-palette-color-8);
+            background-image: none;
+            --theme-border-top: none;
+            --theme-border-bottom: none;
+            --theme-box-shadow: 0px 10px 20px rgba(44, 62, 80, 0.05);
+        }
+
+        [data-header*="type-1"] .ct-header [data-sticky*="yes"] [data-row*="middle"]>div {
+            --theme-border-top: none;
+            --theme-border-bottom: none;
+        }
+
+        /* Header Top Row Styles */
+        [data-header*="type-1"] .ct-header [data-row*="top"] {
+            background-color: var(--theme-palette-color-8);
+            background-image: none;
+            --theme-border-top: none;
+            --theme-border-bottom: none;
+            --theme-box-shadow: none;
+        }
+
+        [data-header*="type-1"] .ct-header [data-row*="top"]>div {
+            --theme-border-top: none;
+            --theme-border-bottom: none;
+        }
+
+        [data-header*="type-1"] .ct-header [data-transparent-row="yes"][data-row*="top"] {
+            background-color: var(--theme-palette-color-8);
+            background-image: none;
+            --theme-border-top: none;
+            --theme-border-bottom: none;
+            --theme-box-shadow: none;
+        }
+
+        [data-header*="type-1"] .ct-header [data-transparent-row="yes"][data-row*="top"]>div {
+            --theme-border-top: none;
+            --theme-border-bottom: none;
+        }
+
+        [data-header*="type-1"] .ct-header [data-sticky*="yes"] [data-row*="top"] {
+            background-color: var(--theme-palette-color-8);
+            background-image: none;
+            --theme-border-top: none;
+            --theme-border-bottom: none;
+            --theme-box-shadow: none;
+        }
+
+        /* Offcanvas Panel Styles */
+        [data-header*="type-1"] #offcanvas .ct-panel-inner {
+            background-color: rgba(18, 21, 25, 0.98);
+        }
+
+        /* Search Icon Styles */
+        [data-header*="type-1"] [data-transparent-row="yes"] [data-id="search"] {
+            --theme-icon-color: var(--theme-palette-color-8);
+        }
+
+        /* Submenu Arrow Styles - Rotate right for submenu items */
+        [data-header*="type-1"] .ct-header .sub-menu .ct-toggle-dropdown-desktop.submenu-arrow-right {
+            transform: rotate(-90deg);
+        }
+
+        /* ==========================================================================
+           End of Header & Menu Styling
+           ========================================================================== */
+    </style>
+    <?php
+}
+add_action('wp_head', 'elysia_first_web_menu_styles', 99);
+add_action('wp_footer', 'elysia_first_web_enqueue_video_popup_assets', 99);

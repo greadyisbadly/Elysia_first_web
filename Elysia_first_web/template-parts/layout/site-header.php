@@ -70,15 +70,28 @@
 											data-dropdown="type-1:simple" data-stretch data-responsive="no" itemscope=""
 											itemtype="https://schema.org/SiteNavigationElement" aria-label="<?php esc_attr_e('Main Menu', 'elysia_first_web'); ?>">
 											<?php
-											wp_nav_menu(
-												array(
-													'theme_location' => 'primary',
-													'container'      => '',
-													'menu_id'        => 'menu-main-menu',
-													'menu_class'     => 'menu',
-													'fallback_cb'    => false,
-												)
-											);
+											if (class_exists('Elysia_Menu_Walker')) {
+												wp_nav_menu(
+													array(
+														'theme_location' => 'primary',
+														'container'      => '',
+														'menu_id'        => 'menu-main-menu',
+														'menu_class'     => 'menu',
+														'fallback_cb'    => false,
+														'walker'         => new Elysia_Menu_Walker(),
+													)
+												);
+											} else {
+												wp_nav_menu(
+													array(
+														'theme_location' => 'primary',
+														'container'      => '',
+														'menu_id'        => 'menu-main-menu',
+														'menu_class'     => 'menu',
+														'fallback_cb'    => false,
+													)
+												);
+											}
 											?>
 										</nav>
 
